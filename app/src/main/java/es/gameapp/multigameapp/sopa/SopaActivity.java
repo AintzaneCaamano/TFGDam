@@ -7,15 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import es.gameapp.multigameapp.InfoActivity;
 import es.gameapp.multigameapp.R;
 import es.gameapp.multigameapp.YourScoreActivity;
 import es.gameapp.multigameapp.hanoi.HanoyActivity;
+import es.gameapp.multigameapp.trivia.TriviaActivity;
 
 
 public class SopaActivity extends AppCompatActivity {
     //Views
     private Button btnReturn;
     private Button btnScore;
+    private Button btnInfo;
 
     //vars
     private int score=0;
@@ -28,6 +31,7 @@ public class SopaActivity extends AppCompatActivity {
         //Initialize views
         btnReturn = findViewById(R.id.btn_sopa_return);
         btnScore = findViewById(R.id.btn_sopa_save);
+        btnInfo= findViewById(R.id.btn_sopa_info);
 
         //Intents
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +52,15 @@ public class SopaActivity extends AppCompatActivity {
                 startActivity(intento);
                 setResult(RESULT_OK);
                 finish();
+            }
+        });
+        btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Open your score
+                Intent intento = new Intent(SopaActivity.this, InfoActivity.class);
+                intento.putExtra("game", GAMETITLE);
+                startActivity(intento);
             }
         });
         //End Intents

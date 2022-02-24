@@ -3,4 +3,5 @@
     <string name="txt_return">Volver al Menú</string>
     <string name="txt_save">Guardar</string>
     <string name="txt_yourScore">Tu puntuación</string>
+    <string name="txt_info">info</string>
 </resources>

@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-
+/*
 import modelo.Tarea;
 import modelo.Usuario;
 
 /**
  * Wraps the logic for a SQLite database
  */
-public class DataManager extends SQLiteOpenHelper {
+/*public class DataManager extends SQLiteOpenHelper {
 
     // Database Information
     private static final String DB_NAME = "agendaTareas.db";
@@ -441,6 +441,7 @@ public class DataManager extends SQLiteOpenHelper {
 
     /*String query = "Select * FROM " + TABLE_NAME_USUARIO + " WHERE " + NOMBRE +
             " like " + "'" + nombre + "'" + " and " + PASSWORD + " like " + "'" +
-            apellido1 + "'" + " and " + APELLIDO2 + " like " + "'" + apellido2 + "'";*/
+            apellido1 + "'" + " and " + APELLIDO2 + " like " + "'" + apellido2 + "'";
+            }*/
 
-}
+

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import es.gameapp.multigameapp.InfoActivity;
 import es.gameapp.multigameapp.R;
 import es.gameapp.multigameapp.YourScoreActivity;
 import es.gameapp.multigameapp.simon.SimonActivity;
@@ -15,6 +16,8 @@ public class BlackActivity extends AppCompatActivity {
     //Views
     private Button btnReturn;
     private Button btnScore;
+    private Button btnInfo;
+
     //vars
     private int score=0;
     private final String GAMETITLE = "BLACKJACK";
@@ -26,7 +29,7 @@ public class BlackActivity extends AppCompatActivity {
         //Initialize views
         btnReturn = findViewById(R.id.btn_black_return);
         btnScore = findViewById(R.id.btn_black_save);
-
+        btnInfo= findViewById(R.id.btn_black_info);
         //Intents
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +49,15 @@ public class BlackActivity extends AppCompatActivity {
                 startActivity(intento);
                 setResult(RESULT_OK);
                 finish();
+            }
+        });
+        btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Open your score
+                Intent intento = new Intent(BlackActivity.this, InfoActivity.class);
+                intento.putExtra("game", GAMETITLE);
+                startActivity(intento);
             }
         });
         //End Intents

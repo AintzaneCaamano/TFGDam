@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import es.gameapp.multigameapp.InfoActivity;
 import es.gameapp.multigameapp.R;
 import es.gameapp.multigameapp.YourScoreActivity;
 import es.gameapp.multigameapp.sopa.SopaActivity;
+import es.gameapp.multigameapp.trivia.TriviaActivity;
 
 public class SudokuActivity extends AppCompatActivity {
     //Views
     private Button btnReturn;
     private Button btnScore;
+    private Button btnInfo;
 
     //vars
     private int score=0;
@@ -27,6 +30,7 @@ public class SudokuActivity extends AppCompatActivity {
         //Initialize views
         btnReturn = findViewById(R.id.btn_sudoku_return);
         btnScore = findViewById(R.id.btn_sudoku_save);
+        btnInfo= findViewById(R.id.btn_sudoku_info);
 
         //Intents
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +51,15 @@ public class SudokuActivity extends AppCompatActivity {
                 startActivity(intento);
                 setResult(RESULT_OK);
                 finish();
+            }
+        });
+        btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Open your score
+                Intent intento = new Intent(SudokuActivity.this, InfoActivity.class);
+                intento.putExtra("game", GAMETITLE);
+                startActivity(intento);
             }
         });
         //End Intents

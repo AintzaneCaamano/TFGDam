@@ -7,15 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import es.gameapp.multigameapp.InfoActivity;
 import es.gameapp.multigameapp.MenuActivity;
 import es.gameapp.multigameapp.R;
 import es.gameapp.multigameapp.YourScoreActivity;
 import es.gameapp.multigameapp.blackjack.BlackActivity;
+import es.gameapp.multigameapp.trivia.TriviaActivity;
 
 public class SimonActivity extends AppCompatActivity {
    //Views
     private Button btnReturn;
     private Button btnScore;
+    private Button btnInfo;
+
     //vars
     private int score=0;
     private final String GAMETITLE = "SIMON";
@@ -26,6 +30,7 @@ public class SimonActivity extends AppCompatActivity {
         //Initialize views
         btnReturn = findViewById(R.id.btn_simon_return);
         btnScore = findViewById(R.id.btn_simon_save);
+        btnInfo= findViewById(R.id.btn_simon_info);
 
         //Intents
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +51,15 @@ public class SimonActivity extends AppCompatActivity {
                 startActivity(intento);
                 setResult(RESULT_OK);
                 finish();
+            }
+        });
+        btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Open your score
+                Intent intento = new Intent(SimonActivity.this, InfoActivity.class);
+                intento.putExtra("game", GAMETITLE);
+                startActivity(intento);
             }
         });
         //End Intents
