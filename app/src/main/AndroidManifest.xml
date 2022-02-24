@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MultiGameApp">
         <activity
+            android:name=".blackjack.BlackActivity"
+            android:exported="true" />
+        <activity
+            android:name=".hanoi.HanoyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".sopa.SopaActivity"
+            android:exported="true" />
+        <activity
             android:name=".sudoku.SudokuActivity"
             android:exported="true" />
         <activity
