@@ -6,4 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".YourScoreActivity">
 
+    <Button
+        android:id="@+id/btn_score_return"
+        android:layout_width="172dp"
+        android:layout_height="65dp"
+        android:text="@string/txt_return"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
+
+    <Button
+        android:id="@+id/btn_score_save"
+        android:layout_width="172dp"
+        android:layout_height="65dp"
+        android:text="@string/txt_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
+
+    <TextView
+        android:id="@+id/txtV_score_title"
+        android:layout_width="356dp"
+        android:layout_height="65dp"
+        android:text="@string/txt_yourScore"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <TextView
+        android:id="@+id/txtV_score_gameName"
+        android:layout_width="356dp"
+        android:layout_height="65dp"
+        android:text="@string/txt_yourScore"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.171" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

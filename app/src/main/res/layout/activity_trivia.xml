@@ -5,5 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".trivia.TriviaActivity">
+    <Button
+        android:id="@+id/btn_trivia_return"
+        android:layout_width="172dp"
+        android:layout_height="65dp"
+        android:text="@string/txt_return"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
 
+    <Button
+        android:id="@+id/btn_trivia_save"
+        android:layout_width="172dp"
+        android:layout_height="65dp"
+        android:text="@string/txt_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
 </androidx.constraintlayout.widget.ConstraintLayout>
