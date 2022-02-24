@@ -10,6 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MultiGameApp">
         <activity
+            android:name=".sudoku.SudokuActivity"
+            android:exported="true" />
+        <activity
+            android:name=".trivia.TriviaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".simon.SimonActivity"
+            android:exported="true" />
+        <activity
+            android:name=".InfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RankingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".YourScoreActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
