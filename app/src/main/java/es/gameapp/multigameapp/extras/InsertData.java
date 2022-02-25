@@ -37,86 +37,110 @@ public class InsertData {
     }
 
     public void cargarPreguntasSql(){
-        //cargarArrayPreguntas();
-
-        cargarArrayPreguntasXML();
-
-
+        cargarArrayPreguntas();
         for (Pregunta pregunta: arrayPreguntas) {
             db.insertPregunta(pregunta);
         }
     }
 
-    private void cargarArrayPreguntas(){
-        String rutaArchivo = "raw/preguntas_trivia.txt";
-        try {
-            // Inicializamos file y reader
-            FileReader file = null;
-            file = new FileReader(rutaArchivo);
-            BufferedReader reader = new BufferedReader(file);
-
-            String line;
-            try {
-                while ((line = reader.readLine()) != null) {
-                    String readedData[] = line.split(";");
-                    Pregunta pregunta = new Pregunta();
-                    pregunta.setTexto(readedData[1]);
-                    pregunta.setOpcion1(readedData[2]);
-                    pregunta.setOpcion2(readedData[3]);
-                    pregunta.setOpcion3(readedData[4]);
-                    pregunta.setOpcion4(readedData[5]);
-                    pregunta.setRespuesta(readedData[6]);
-
-                    arrayPreguntas.add(pregunta);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Cerramos file y reader
-            file.close();
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("File exception");
-            e.printStackTrace();
+    public void cargarPalabrasSql(){
+        cargarArrayPalabras();
+        for (Palabra palabra: arrayPalabras) {
+            db.insertPalabra(palabra);
         }
     }
 
-    private void cargarArrayPreguntasXML() {
-        String ruta ="raw/preguntas_trivia.xml";
-        File archivo = new File(ruta);
-        DocumentBuilderFactory dbFactoria = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = null;
-        Document doc = null;
-        try {
-            dBuilder = dbFactoria.newDocumentBuilder();
-            doc = dBuilder.parse(archivo);
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
-        }
+    private void cargarArrayPreguntas(){
+        Pregunta pregunta = new Pregunta();
 
-        doc.getDocumentElement().normalize();
-        NodeList nList = doc.getElementsByTagName("pregunta");
+        //Pregunta1
+        pregunta.setTexto("¿Quién fue el primer presidente de la democracia española tras el franquismo?");
+        pregunta.setOpcion1("Adolfo Suárez");
+        pregunta.setOpcion2("Jose Maria Aznar");
+        pregunta.setOpcion3("Jesús Gil");
+        pregunta.setOpcion4("Pedro Sánchez");
+        pregunta.setRespuesta("Adolfo Suárez");
+        arrayPreguntas.add(pregunta);
 
-        for (int temp = 0; temp < nList.getLength(); temp++) {
-            Node nNode = nList.item(temp);
-            Pregunta pregunta = new Pregunta();
-            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+        //Pregunta2
+        pregunta.setTexto("¿La invasión de qué fortaleza es considerada como el punto de inicio de la Revolución Francesa?");
+        pregunta.setOpcion1("La Bastilla");
+        pregunta.setOpcion2("Castillo de Versalles");
+        pregunta.setOpcion3("Fontainebleau");
+        pregunta.setOpcion4("Castillo de Cheverny");
+        pregunta.setRespuesta("La Bastilla");
+        arrayPreguntas.add(pregunta);
 
-                Element elementPregunta = (Element) nNode;
+        //Pregunta3
+        pregunta.setTexto("¿A partir de qué suceso empieza la Edad Media?");
+        pregunta.setOpcion1("La Caída del Imperio Romano");
+        pregunta.setOpcion2("Descubrimiento de América");
+        pregunta.setOpcion3("La Caida del Imperio Mongol");
+        pregunta.setOpcion4("La construcción de la Gran Muralla China");
+        pregunta.setRespuesta("La Caída del Imperio Romano");
+        arrayPreguntas.add(pregunta);
 
-                pregunta.setTexto(elementPregunta.getElementsByTagName("texto").item(0).getTextContent());
-                pregunta.setOpcion1(elementPregunta.getElementsByTagName("opcion1").item(0).getTextContent());
-                pregunta.setOpcion2(elementPregunta.getElementsByTagName("opcion2").item(0).getTextContent());
-                pregunta.setOpcion3(elementPregunta.getElementsByTagName("opcion3").item(0).getTextContent());
-                pregunta.setOpcion4(elementPregunta.getElementsByTagName("opcion4").item(0).getTextContent());
-                pregunta.setRespuesta(elementPregunta.getElementsByTagName("respuesta").item(0).getTextContent());
-            }
-            arrayPreguntas.add(pregunta);
-        }
+        //Pregunta4
+        pregunta.setTexto("¿Quién fue el primer presidente de Estados Unidos?");
+        pregunta.setOpcion1("George Washington");
+        pregunta.setOpcion2("Thomas Jefferson");
+        pregunta.setOpcion3("John Adams");
+        pregunta.setOpcion4("Andrew Jackson");
+        pregunta.setRespuesta("George Washington");
+        arrayPreguntas.add(pregunta);
+
+        //Pregunta5
+        pregunta.setTexto("¿Qué filósofo de la Antigua Grecia creía que el elemento del que están compuestas todas las cosas es el agua?");
+        pregunta.setOpcion1("Tales de Mileto");
+        pregunta.setOpcion2("Pitágoras");
+        pregunta.setOpcion3("Aristóteles");
+        pregunta.setOpcion4("Arquímedes");
+        pregunta.setRespuesta("Tales de Mileto");
+        arrayPreguntas.add(pregunta);
+    }
+
+    private void cargarArrayPalabras(){
+        Palabra palabra = new Palabra();
+
+        //Palabra1
+        palabra.setStringPalabra("BARBA");
+        arrayPalabras.add(palabra);
+
+        //Palabra2
+        palabra.setStringPalabra("CAMION");
+        arrayPalabras.add(palabra);
+
+        //Palabra3
+        palabra.setStringPalabra("ESTUFA");
+        arrayPalabras.add(palabra);
+
+        //Palabra4
+        palabra.setStringPalabra("LETRERO");
+        arrayPalabras.add(palabra);
+
+        //Palabra5
+        palabra.setStringPalabra("CEPILLO");
+        arrayPalabras.add(palabra);
+
+        //Palabra6
+        palabra.setStringPalabra("AGUA");
+        arrayPalabras.add(palabra);
+
+        //Palabra7
+        palabra.setStringPalabra("VASO");
+        arrayPalabras.add(palabra);
+
+        //Palabra8
+        palabra.setStringPalabra("PATATA");
+        arrayPalabras.add(palabra);
+
+        //Palabra9
+        palabra.setStringPalabra("ESCOBA");
+        arrayPalabras.add(palabra);
+
+        //Palabra10
+        palabra.setStringPalabra("SAL");
+        arrayPalabras.add(palabra);
     }
 
 }

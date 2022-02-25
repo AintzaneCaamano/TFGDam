@@ -6,19 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
-<<<<<<< Updated upstream
-/*
-import modelo.Tarea;
-import modelo.Usuario;
-=======
 import es.gameapp.multigameapp.modelo.Palabra;
 import es.gameapp.multigameapp.modelo.Pregunta;
->>>>>>> Stashed changes
 
 /**
  * Wraps the logic for a SQLite database
  */
-/*public class DataManager extends SQLiteOpenHelper {
+public class DataManager extends SQLiteOpenHelper {
 
     // Database Information
     private static final String DB_NAME = "multijuegos.db";
@@ -84,7 +78,7 @@ import es.gameapp.multigameapp.modelo.Pregunta;
 
     //------------------------------ selectAllPreguntas ------------------------------//
 
-    public ArrayList<Pregunta> selectAllPreguntas () {
+    public ArrayList<Pregunta> selectAllPreguntas() {
         ArrayList<Pregunta> ret = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME_PREGUNTAS_TRIVIA;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
@@ -108,7 +102,7 @@ import es.gameapp.multigameapp.modelo.Pregunta;
 
     //------------------------------ selectAllPalabras ------------------------------//
 
-    public ArrayList<Palabra> selectAllPalabras () {
+    public ArrayList<Palabra> selectAllPalabras() {
         ArrayList<Palabra> ret = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME_PALABRAS_SOPA;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
@@ -150,7 +144,7 @@ import es.gameapp.multigameapp.modelo.Pregunta;
 
     //------------------------------ InsertPregunta ------------------------------//
 
-    public void insertPregunta (Pregunta pregunta) {
+    public void insertPregunta(Pregunta pregunta) {
         ContentValues values = new ContentValues();
         values.put(TEXTO, pregunta.getTexto());
         values.put(OPCION1, pregunta.getOpcion1());
@@ -166,7 +160,7 @@ import es.gameapp.multigameapp.modelo.Pregunta;
 
     //------------------------------ InsertTarea ------------------------------//
 
-    public void insertPalabra (Palabra palabra) {
+    public void insertPalabra(Palabra palabra) {
         ContentValues values = new ContentValues();
         values.put(ID_PALABRA, palabra.getIdPalabra());
         values.put(STRING_PALABRA, palabra.getStringPalabra());
@@ -178,7 +172,7 @@ import es.gameapp.multigameapp.modelo.Pregunta;
 
     //------------------------------ UpdatePregunta ------------------------------//
 
-    public boolean updatePregunta (Pregunta pregunta) {
+    public boolean updatePregunta(Pregunta pregunta) {
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         ContentValues args = new ContentValues();
         args.put(TEXTO, pregunta.getTexto());
@@ -194,25 +188,25 @@ import es.gameapp.multigameapp.modelo.Pregunta;
 
     //------------------------------ UpdatePalabra ------------------------------//
 
-    public boolean updatePalabra (Palabra palabra) {
+    public boolean updatePalabra(Palabra palabra) {
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         ContentValues args = new ContentValues();
         args.put(STRING_PALABRA, palabra.getStringPalabra());
 
-        String whereClause = ID_PALABRA + "="  + palabra.getIdPalabra();
+        String whereClause = ID_PALABRA + "=" + palabra.getIdPalabra();
 
         return sQLiteDatabase.update(TABLE_NAME_PALABRAS_SOPA, args, whereClause, null) > 0;
     }
 
     //------------------------------ DeletePreguntabyId ------------------------------//
 
-    public int deletePreguntaById (int id) {
+    public int deletePreguntaById(int id) {
         int ret;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        Pregunta pregunta = new Pregunta ();
+        Pregunta pregunta = new Pregunta();
         pregunta.setIdPregunta(id);
         ret = sQLiteDatabase.delete(TABLE_NAME_PREGUNTAS_TRIVIA, ID_PREGUNTA + "=?",
-                new String[] {
+                new String[]{
                         String.valueOf(pregunta.getIdPregunta())
                 });
         sQLiteDatabase.close();
@@ -221,13 +215,13 @@ import es.gameapp.multigameapp.modelo.Pregunta;
 
     //------------------------------ DeletePalabra ------------------------------//
 
-    public int deletePalabraById (int id) {
+    public int deletePalabraById(int id) {
         int ret;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Palabra palabra = new Palabra();
         palabra.setIdPalabra(id);
         ret = sQLiteDatabase.delete(TABLE_NAME_PALABRAS_SOPA, ID_PALABRA + "=?",
-                new String[] {
+                new String[]{
                         String.valueOf(palabra.getIdPalabra())
                 });
         sQLiteDatabase.close();
@@ -243,7 +237,7 @@ import es.gameapp.multigameapp.modelo.Pregunta;
             SQLiteDatabase sQLiteDatabase = this.getReadableDatabase();
             String query = "select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
                     TABLE_NAME_PREGUNTAS_TRIVIA + "'";
-            cursor = sQLiteDatabase.rawQuery( query, null );
+            cursor = sQLiteDatabase.rawQuery(query, null);
             if (cursor != null) {
                 if (cursor.getCount() > 0) {
                     ret = true;
@@ -251,8 +245,8 @@ import es.gameapp.multigameapp.modelo.Pregunta;
             }
         } catch (Exception e) {
             // Nothing to do here...
-        } finally{
-            try{
+        } finally {
+            try {
                 assert cursor != null;
                 cursor.close();
             } catch (NullPointerException e) {
@@ -262,22 +256,21 @@ import es.gameapp.multigameapp.modelo.Pregunta;
         return ret;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         boolean ret = true;
         Cursor cursor = null;
         try {
             SQLiteDatabase sQLiteDatabase = this.getReadableDatabase();
-            cursor = sQLiteDatabase.rawQuery( "SELECT count(*) FROM (select 0 from " +
-                    TABLE_NAME_PREGUNTAS_TRIVIA + " limit 1)", null );
+            cursor = sQLiteDatabase.rawQuery("SELECT count(*) FROM (select 0 from " +
+                    TABLE_NAME_PREGUNTAS_TRIVIA + " limit 1)", null);
             cursor.moveToFirst();
-            int count = cursor.getInt( 0 );
+            int count = cursor.getInt(0);
             if (count > 0) {
                 ret = false;
             }
         } catch (Exception e) {
             // Nothing to do here...
-        }
-        finally {
+        } finally {
             try {
                 assert cursor != null;
                 cursor.close();
@@ -287,6 +280,7 @@ import es.gameapp.multigameapp.modelo.Pregunta;
         }
         return ret;
     }
+}
 
     /*String query = "Select * FROM " + TABLE_NAME_USUARIO + " WHERE " + NOMBRE +
             " like " + "'" + nombre + "'" + " and " + PASSWORD + " like " + "'" +
