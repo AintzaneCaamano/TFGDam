@@ -31,27 +31,61 @@
         app:layout_constraintVertical_bias="0.929" />
 
     <TextView
-        android:id="@+id/txtV_score_title"
+        android:id="@+id/txtV_score_score"
         android:layout_width="356dp"
-        android:layout_height="65dp"
+        android:layout_height="98dp"
         android:text="@string/txt_yourScore"
+        android:textAlignment="center"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.202" />
 
     <TextView
         android:id="@+id/txtV_score_gameName"
         android:layout_width="356dp"
         android:layout_height="65dp"
         android:text="@string/txt_yourScore"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.082" />
+
+    <EditText
+        android:id="@+id/txtV_score_insertName"
+        android:layout_width="350dp"
+        android:layout_height="132dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559" />
+
+    <TextView
+        android:id="@+id/txtV_score_textInsertName"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:text="@string/txt_insertName"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.399" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

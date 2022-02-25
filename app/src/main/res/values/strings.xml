@@ -4,4 +4,7 @@
     <string name="txt_save">Guardar</string>
     <string name="txt_yourScore">Tu puntuación</string>
     <string name="txt_info">info</string>
+    <string name="txt_insertName">Escribe tu nombre</string>
+    <string name="txt_returnGame">Volver al juego</string>
+    <string name="toast_UserLength">Debes escribir tu nombre de usuario, con más de tres letras</string>
 </resources>
