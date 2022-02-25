@@ -15,6 +15,8 @@ public class YourScoreActivity extends AppCompatActivity {
     private Button btnReturn;
     private Button btnRanking;
     private TextView txtVGameName;
+    private TextView txtVScore;
+    private TextView txtVPlayerName;
     //vars
     private String user;
     private String game;
@@ -29,6 +31,8 @@ public class YourScoreActivity extends AppCompatActivity {
         btnRanking = findViewById(R.id.btn_score_save);
         //TxtViews
         txtVGameName = findViewById(R.id.txtV_score_gameName);
+        txtVScore = findViewById(R.id.txtV_score_score);
+        txtVPlayerName = findViewById(R.id.txtV_score_insertName);
 
         //Get extras from previous activity
         Bundle extras = getIntent().getExtras();
@@ -36,6 +40,7 @@ public class YourScoreActivity extends AppCompatActivity {
         score = extras.getInt("score");
 
         txtVGameName.setText(game);
+        txtVScore.setText(String.valueOf(score));
 
         //Intents
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -49,14 +54,28 @@ public class YourScoreActivity extends AppCompatActivity {
         btnRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Open your score
-                Intent intento = new Intent(YourScoreActivity.this, RankingActivity.class);
-                startActivity(intento);
-                setResult(RESULT_OK);
-                finish();
+               if(saveRanking()) {
+                   //Open ranking
+                   Intent intento = new Intent(YourScoreActivity.this, RankingActivity.class);
+                   intento.putExtra("game", game);
+                   startActivity(intento);
+                   setResult(RESULT_OK);
+                   finish();
+               }
             }
         });
         //End Intents
+    }
+
+    private boolean saveRanking(){
+        user = txtVPlayerName.getText().toString();
+        if (user.length()>3) {
+            return true;
+        }else {
+            String text = getResources().getString(R.string.toast_UserLength);
+            Common.showToast(this, text);
+            return false;
+        }
     }
 
 }

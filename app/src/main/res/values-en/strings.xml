@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MultiGameApp</string>
+    <string name="txt_returnGame">Back to game</string>
+    <string name="txt_insertName">Write your nickname</string>
+    <string name="txt_info">Info</string>
+    <string name="txt_yourScore">Your score:</string>
+    <string name="txt_save">Save</string>
+    <string name="txt_return">Back to menu</string>
+    <string name="toast_UserLength">A nickname is needed. It must be 3 letters long at least</string>
 </resources>
