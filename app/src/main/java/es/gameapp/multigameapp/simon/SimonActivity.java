@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import es.gameapp.multigameapp.Common;
 import es.gameapp.multigameapp.InfoActivity;
 import es.gameapp.multigameapp.MenuActivity;
 import es.gameapp.multigameapp.R;
@@ -75,12 +76,10 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
         btnFa.setOnClickListener(this);
 
         //Uris
-        SOUND_DO = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.always);
+        SOUND_DO = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.re);
         SOUND_RE = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.re);
         SOUND_MI = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mi);
         SOUND_FA = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fa);
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.always);
-        txtVScore.setText(uri.toString());
 
         //Initialize mediaPController
         mediaPController = new MediaPController(this);
@@ -120,6 +119,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
             }
         });
         //End Intents
+        startGame();
     }
 
     @Override
@@ -127,17 +127,22 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
         //Controls on click of the game methods
         if (v==btnDo){
             mediaPController.initMediaPlayer(SOUND_DO);
-            userSequence.add(0);
+            play(0);
         }else if (v==btnRe){
             mediaPController.initMediaPlayer(SOUND_RE);
-            userSequence.add(1);
+            play(1);
         }else if (v==btnMi){
             mediaPController.initMediaPlayer(SOUND_MI);
-            userSequence.add(2);
+            play(2);
         }else if (v==btnFa){
             mediaPController.initMediaPlayer(SOUND_FA);
-            userSequence.add(3);
+            play(3);
         }
+    }
+    private void startGame(){
+        sequenceManager.addValue(3);
+        gameSequence=sequenceManager.getSequence();
+        showSequence();
     }
 
     private void play(int number){
@@ -166,6 +171,37 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
     }
 
     private void showSequence() {
+        disableButtons();
         //It shows the secuence to the player
+        for(int code:gameSequence){
+            switch (code){
+                case 0:
+                    mediaPController.initMediaPlayer(SOUND_DO);
+                    break;
+                case 1:
+                    mediaPController.initMediaPlayer(SOUND_RE);
+                    break;
+                case 2:
+                    mediaPController.initMediaPlayer(SOUND_MI);
+                    break;
+                case 3:
+                    mediaPController.initMediaPlayer(SOUND_FA);
+                    break;
+            }
+        }
+        enableButtons();
+    }
+
+    private void disableButtons(){
+        btnDo.setEnabled(false);
+        btnRe.setEnabled(false);
+        btnMi.setEnabled(false);
+        btnFa.setEnabled(false);
+    }
+    private void enableButtons(){
+        btnDo.setEnabled(true);
+        btnRe.setEnabled(true);
+        btnMi.setEnabled(true);
+        btnFa.setEnabled(true);
     }
 }

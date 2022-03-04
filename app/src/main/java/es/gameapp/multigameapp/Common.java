@@ -11,4 +11,11 @@ public class Common {
         Toast toast = Toast.makeText(context.getApplicationContext(), text, Toast.LENGTH_LONG);
         toast.show();
     }
+    public static void waitTime(int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
