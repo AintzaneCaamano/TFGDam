@@ -23,7 +23,7 @@ public class MediaPController implements MediaController.MediaPlayerControl{
     }
 
     MediaPController(Context c, Uri resource){
-        //this tajes context from activity and the uri of the mp3, then starts playing the audio
+        //this takes context from activity and the uri of the mp3, then starts playing the audio
         //REMEMBER to CLOSE the media player after.
         this.context=c;
         this.uri = resource;
@@ -90,7 +90,7 @@ public class MediaPController implements MediaController.MediaPlayerControl{
     }
 
     //-----------------------Default Methods--------------------------------------------
-    //This methods must be here because of the 'implements' statement. They can be used as pleased.
+    //This methods must be here because of the 'implements' statement. They can be used as you please.
     @Override
     public void start() {
 
