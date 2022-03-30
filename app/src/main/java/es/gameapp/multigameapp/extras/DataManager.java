@@ -6,8 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
+
+import es.gameapp.multigameapp.modelo.Juego;
 import es.gameapp.multigameapp.modelo.Palabra;
 import es.gameapp.multigameapp.modelo.Pregunta;
+import es.gameapp.multigameapp.modelo.Score;
+import es.gameapp.multigameapp.modelo.Sopa;
 
 /**
  * Wraps the logic for a SQLite database
@@ -20,7 +24,7 @@ public class DataManager extends SQLiteOpenHelper {
     // Database version
     private static final int DB_VERSION = 1;
 
-    // Table Name
+    // TABLA PREGUNTAS
     public static final String TABLE_NAME_PREGUNTAS_TRIVIA = "Preguntas";
 
     // Table columns
@@ -31,7 +35,6 @@ public class DataManager extends SQLiteOpenHelper {
     private static final String OPCION3 = "opcion3";
     private static final String OPCION4 = "opcion4";
     private static final String RESPUESTA = "respuesta";
-
 
     // Creating table query
     private static final String CREATE_TABLE_PREGUNTAS = "create table " + TABLE_NAME_PREGUNTAS_TRIVIA + "(" +
@@ -44,17 +47,64 @@ public class DataManager extends SQLiteOpenHelper {
             RESPUESTA + " TEXT " +
             ");";
 
-    // Table Name
+    // TABLA JUEGOS
+    public static final String TABLE_NAME_JUEGOS = "Juegos";
+
+    // Table columns
+    private static final String ID_JUEGO = "id";
+    private static final String NOMBRE_JUEGO = "nombre";
+
+    // Creating table query
+    private static final String CREATE_TABLE_JUEGOS = "create table " + TABLE_NAME_JUEGOS + "(" +
+            ID_JUEGO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            NOMBRE_JUEGO + " TEXT " +
+            ");";
+
+    // TABLA SCORES
+    public static final String TABLE_NAME_SCORES = "Scores";
+
+    // Table columns
+    private static final String ID_SCORE = "id";
+    private static final String ID_JUEGO_FK = "id_juego";
+    private static final String PLAYER = "player";
+    private static final String SCORE = "score";
+
+    //table query
+    private static final String CREATE_TABLE_SCORES = "create table " + TABLE_NAME_SCORES + "(" +
+            ID_SCORE + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            ID_JUEGO_FK + " TEXT, " +
+            PLAYER + " TEXT, " +
+            SCORE + " TEXT, " +
+            " FOREIGN KEY ("+ID_JUEGO_FK+") REFERENCES "+TABLE_NAME_JUEGOS+"("+ID_JUEGO+"));";
+
+
+    // TABLA SOPAS
+    public static final String TABLE_NAME_SOPAS = "Scores";
+
+    // Table columns
+    private static final String ID_SOPA = "id";
+    private static final String STRING_IMAGEN_SOPA = "imageBase64";
+
+    // Creating table query
+    private static final String CREATE_TABLE_SOPAS = "create table " + TABLE_NAME_SOPAS + "(" +
+            ID_SOPA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            STRING_IMAGEN_SOPA + " TEXT " +
+            ");";
+
+    // TABLA PALABRAS
     public static final String TABLE_NAME_PALABRAS_SOPA = "Palabras";
 
     // Table columns
     private static final String ID_PALABRA = "id";
     private static final String STRING_PALABRA = "palabra";
+    private static final String ID_SOPA_FK = "id_sopa";
 
     private static final String CREATE_TABLE_PALABRAS = "create table " + TABLE_NAME_PALABRAS_SOPA + "(" +
             ID_PALABRA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            STRING_PALABRA + " TEXT " +
-            ");";
+            ID_SOPA_FK + " TEXT, " +
+            STRING_PALABRA + " TEXT, " +
+            " FOREIGN KEY ("+ID_SOPA_FK+") REFERENCES "+TABLE_NAME_SOPAS+"("+ID_SOPA+"));";
+
 
     private final Context context;
 
@@ -65,14 +115,20 @@ public class DataManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sQLiteDatabase) {
+        sQLiteDatabase.execSQL(CREATE_TABLE_JUEGOS);
+        sQLiteDatabase.execSQL(CREATE_TABLE_SOPAS);
         sQLiteDatabase.execSQL(CREATE_TABLE_PREGUNTAS);
         sQLiteDatabase.execSQL(CREATE_TABLE_PALABRAS);
+        sQLiteDatabase.execSQL(CREATE_TABLE_SCORES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sQLiteDatabase, int oldVersion, int newVersion) {
-        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PALABRAS_SOPA);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_JUEGOS);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SOPAS);
         sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PREGUNTAS_TRIVIA);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PALABRAS_SOPA);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SCORES);
         onCreate(sQLiteDatabase);
     }
 
@@ -100,18 +156,42 @@ public class DataManager extends SQLiteOpenHelper {
         return ret;
     }
 
-    //------------------------------ selectAllPalabras ------------------------------//
+    //------------------------------ SelectSopa by Id ------------------------------//
 
-    public ArrayList<Palabra> selectAllPalabras() {
+    public Sopa selectSopaById (int id) {
+        String query = "Select * FROM " + TABLE_NAME_SOPAS + " WHERE " + ID_SOPA +
+                " = " + "'" + id + "'";
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
+
+        Sopa sopa;
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            sopa = new Sopa();
+            sopa.setIdSopa(cursor.getInt(0));
+            sopa.setStringSopaBase64(cursor.getString(1));
+            cursor.close();
+        } else {
+            sopa = null;
+        }
+        sQLiteDatabase.close();
+        return sopa;
+    }
+    //------------------------------ selectPalabrasByIdSopa ------------------------------//
+
+    public ArrayList<Palabra> selectPalabrasByIdSopa (int idSopa) {
         ArrayList<Palabra> ret = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE_NAME_PALABRAS_SOPA;
+        String query = "Select * FROM " + TABLE_NAME_PALABRAS_SOPA + " WHERE " + ID_SOPA_FK +
+                "=" + "'" + idSopa + "'";
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
         Palabra palabra;
         while (cursor.moveToNext()) {
             palabra = new Palabra();
             palabra.setIdPalabra(cursor.getInt(0));
-            palabra.setStringPalabra(cursor.getString(1));
+            palabra.setIdSopaFk(cursor.getInt(1));
+            palabra.setStringPalabra(cursor.getString(2));
+
             ret.add(palabra);
         }
         cursor.close();
@@ -119,28 +199,46 @@ public class DataManager extends SQLiteOpenHelper {
         return ret;
     }
 
-    //------------------------------ SelectUsuario by Id ------------------------------//
+    //------------------------------ selectAllScores ------------------------------//
 
-    /*public Usuario selectUsuarioById (int id) {
-        String query = "Select * FROM " + TABLE_NAME_PREGUNTAS_TRIVIA + " WHERE " + ID_PREGUNTA +
-                " = " + "'" + id + "'";
+    public ArrayList<Score> selectAllScores() {
+        ArrayList<Score> ret = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME_SCORES;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
-
-        Usuario usuario;
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            usuario = new Usuario();
-            usuario.setId(cursor.getInt(0));
-            usuario.setNombreUsuario(cursor.getString(1));
-            usuario.setPassword(cursor.getString(2));
-            cursor.close();
-        } else {
-            usuario = null;
+        Score score;
+        while (cursor.moveToNext()) {
+            score = new Score();
+            score.setIdScore(cursor.getInt(0));
+            score.setPlayer(cursor.getString(1));
+            score.setScore(cursor.getString(2));
+            ret.add(score);
         }
+        cursor.close();
         sQLiteDatabase.close();
-        return usuario;
-    }*/
+        return ret;
+    }
+
+    //------------------------------ selectBestScores ------------------------------//
+
+    public ArrayList<Score> selectBestScoresByIdJuego(int idJuego) {
+        ArrayList<Score> ret = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME_SCORES + " WHERE " + ID_JUEGO_FK +
+                "=" + "'" + idJuego + "'"+ " ORDER BY " + SCORE + " DESC ";
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
+        Score score;
+        while (cursor.moveToNext()) {
+            score = new Score();
+            score.setIdScore(cursor.getInt(0));
+            score.setPlayer(cursor.getString(1));
+            score.setScore(cursor.getString(2));
+            ret.add(score);
+        }
+        cursor.close();
+        sQLiteDatabase.close();
+        return ret;
+    }
 
     //------------------------------ InsertPregunta ------------------------------//
 
@@ -158,15 +256,50 @@ public class DataManager extends SQLiteOpenHelper {
         sQLiteDatabase.close();
     }
 
-    //------------------------------ InsertTarea ------------------------------//
+    //------------------------------ InsertPalabra ------------------------------//
 
     public void insertPalabra(Palabra palabra) {
         ContentValues values = new ContentValues();
-        values.put(ID_PALABRA, palabra.getIdPalabra());
+        values.put(ID_SOPA_FK, palabra.getIdSopaFk());
         values.put(STRING_PALABRA, palabra.getStringPalabra());
 
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         sQLiteDatabase.insert(TABLE_NAME_PALABRAS_SOPA, null, values);
+        sQLiteDatabase.close();
+    }
+
+    //------------------------------ InsertScore ------------------------------//
+
+    public void insertScore(Score score) {
+        ContentValues values = new ContentValues();
+        values.put(ID_JUEGO_FK, score.getIdJuegoFk());
+        values.put(PLAYER, score.getPlayer());
+        values.put(SCORE, score.getScore());
+
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        sQLiteDatabase.insert(TABLE_NAME_SCORES, null, values);
+        sQLiteDatabase.close();
+    }
+
+    //------------------------------ InsertSopa ------------------------------//
+
+    public void insertSopa(Sopa sopa) {
+        ContentValues values = new ContentValues();
+        values.put(STRING_IMAGEN_SOPA, sopa.getStringSopaBase64());
+
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        sQLiteDatabase.insert(TABLE_NAME_SOPAS, null, values);
+        sQLiteDatabase.close();
+    }
+
+    //------------------------------ InsertJuego ------------------------------//
+
+    public void insertJuego(Juego juego) {
+        ContentValues values = new ContentValues();
+        values.put(NOMBRE_JUEGO, juego.getNombre());
+
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        sQLiteDatabase.insert(TABLE_NAME_JUEGOS, null, values);
         sQLiteDatabase.close();
     }
 
@@ -198,6 +331,34 @@ public class DataManager extends SQLiteOpenHelper {
         return sQLiteDatabase.update(TABLE_NAME_PALABRAS_SOPA, args, whereClause, null) > 0;
     }
 
+    //------------------------------ UpdateScore ------------------------------//
+
+    public boolean updateScore(Score score) {
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(PLAYER, score.getPlayer());
+        args.put(SCORE, score.getScore());
+
+
+        String whereClause = ID_SCORE + "=" + score.getIdScore();
+
+        return sQLiteDatabase.update(TABLE_NAME_SCORES, args, whereClause, null) > 0;
+    }
+
+    //------------------------------ UpdateSopa ------------------------------//
+
+    public boolean updateSopa(Sopa sopa) {
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(STRING_IMAGEN_SOPA, sopa.getStringSopaBase64());
+
+
+
+        String whereClause = ID_SCORE + "=" + sopa.getIdSopa();
+
+        return sQLiteDatabase.update(TABLE_NAME_SOPAS, args, whereClause, null) > 0;
+    }
+
     //------------------------------ DeletePreguntabyId ------------------------------//
 
     public int deletePreguntaById(int id) {
@@ -213,7 +374,7 @@ public class DataManager extends SQLiteOpenHelper {
         return ret;
     }
 
-    //------------------------------ DeletePalabra ------------------------------//
+    //------------------------------ DeletePalabrabyID ------------------------------//
 
     public int deletePalabraById(int id) {
         int ret;
@@ -223,6 +384,36 @@ public class DataManager extends SQLiteOpenHelper {
         ret = sQLiteDatabase.delete(TABLE_NAME_PALABRAS_SOPA, ID_PALABRA + "=?",
                 new String[]{
                         String.valueOf(palabra.getIdPalabra())
+                });
+        sQLiteDatabase.close();
+        return ret;
+    }
+
+    //------------------------------ DeleteScorebyID ------------------------------//
+
+    public int deleteScoreById(int id) {
+        int ret;
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Score score = new Score();
+        score.setIdScore(id);
+        ret = sQLiteDatabase.delete(TABLE_NAME_SCORES, ID_SCORE + "=?",
+                new String[]{
+                        String.valueOf(score.getIdScore())
+                });
+        sQLiteDatabase.close();
+        return ret;
+    }
+
+    //------------------------------ DeleteSopabyId ------------------------------//
+
+    public int deleteSopaById(int id) {
+        int ret;
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Sopa sopa = new Sopa();
+        sopa.setIdSopa(id);
+        ret = sQLiteDatabase.delete(TABLE_NAME_SOPAS, ID_SOPA + "=?",
+                new String[]{
+                        String.valueOf(sopa.getIdSopa())
                 });
         sQLiteDatabase.close();
         return ret;

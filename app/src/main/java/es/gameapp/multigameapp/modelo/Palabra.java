@@ -2,16 +2,17 @@ package es.gameapp.multigameapp.modelo;
 
 public class Palabra {
 
-    private int idPalabra;
+    private int idPalabra, idSopaFk;
     private String stringPalabra;
 
     public Palabra(){
 
     }
 
-    public Palabra(int idPalabra, String palabra) {
+    public Palabra(int idPalabra, int idSopaFk, String stringPalabra) {
         this.idPalabra = idPalabra;
-        this.stringPalabra = palabra;
+        this.idSopaFk = idSopaFk;
+        this.stringPalabra = stringPalabra;
     }
 
     public int getIdPalabra() {
@@ -20,6 +21,14 @@ public class Palabra {
 
     public void setIdPalabra(int idPalabra) {
         this.idPalabra = idPalabra;
+    }
+
+    public int getIdSopaFk() {
+        return idSopaFk;
+    }
+
+    public void setIdSopaFk(int idSopaFk) {
+        this.idSopaFk = idSopaFk;
     }
 
     public String getStringPalabra() {
