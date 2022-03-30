@@ -79,6 +79,8 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
         btnFa = findViewById(R.id.btn_simon_fa);
         txtVScore = findViewById(R.id.txtV_simon_score);
 
+        showScore();
+
         //game Buttons OnClickListener
         btnDo.setOnClickListener(this);
         btnRe.setOnClickListener(this);
@@ -171,10 +173,17 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
                     continuePlaying=false;
                 }else{
                     //If player wins, game keeps going
-                    score=score+10;
+                    //It shows the score
+                    score=score+100;
+                    showScore();
+                    //The sequence length grows
+                    sequenceLength++;
+                    //User entered sequence is erased
                     userSequence = new ArrayList<Integer>();
+                    //It generates a new value for the sequence
                     sequenceManager.addValue(1);
                     gameSequence=sequenceManager.getSequence();
+                    //It shows the sequence to the player
                     showSequence();
                 }
             }
@@ -224,6 +233,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
     }
 
     private void changeBtnColor(int btn){
+        int delay = 500;
         Handler handler = new Handler();
         switch (btn){
             case 0:
@@ -233,7 +243,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
                         //Yellow
                         btnDo.setBackgroundColor(Color.parseColor("#FFEB3B"));
                     }
-                }, 1000); //1 second delay for each
+                }, delay); //delay for each
                 break;
             case 1:
                 btnRe.setBackgroundColor(Color.parseColor("#FFFF92B7"));
@@ -242,7 +252,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
                         //red
                         btnRe.setBackgroundColor(Color.parseColor("#E91E63"));
                     }
-                }, 1000); //1 second delay for each
+                }, delay); //delay for each
                 break;
             case 2:
                 btnMi.setBackgroundColor(Color.parseColor("#FF8EDCFF"));
@@ -251,7 +261,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
                         //Blue
                         btnMi.setBackgroundColor(Color.parseColor("#2196F3"));
                     }
-                }, 1000); //1 second delay for each
+                }, delay); //delay for each
                 break;
             case 3:
                 btnFa.setBackgroundColor(Color.parseColor("#FFA3FFA7"));
@@ -260,7 +270,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
                         //Green
                         btnFa.setBackgroundColor(Color.parseColor("#43C848"));
                     }
-                }, 1000); //1 second delay for each
+                }, delay); // delay for each
                 break;
         }
     }
@@ -276,5 +286,10 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
         btnRe.setEnabled(true);
         btnMi.setEnabled(true);
         btnFa.setEnabled(true);
+    }
+    private void showScore(){
+        String text =getResources().getString(R.string.txt_yourScore);
+        text=text + ": " + String.valueOf(score);
+        txtVScore.setText(text);
     }
 }
