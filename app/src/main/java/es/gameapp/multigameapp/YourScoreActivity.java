@@ -3,11 +3,13 @@ package es.gameapp.multigameapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import es.gameapp.multigameapp.media.MediaPController;
 import es.gameapp.multigameapp.simon.SimonActivity;
 
 public class YourScoreActivity extends AppCompatActivity {
@@ -21,6 +23,9 @@ public class YourScoreActivity extends AppCompatActivity {
     private String user;
     private String game;
     private int score;
+
+    //Media
+    private MediaPController mediaPController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +47,22 @@ public class YourScoreActivity extends AppCompatActivity {
         txtVGameName.setText(game);
         txtVScore.setText(String.valueOf(score));
 
+        //Media
+        //Initialize Uris
+        Uri Endmusic = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.grand_final_orchestral);
+        Uri music = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.comedy);
+        //Initialize mediaPController
+        mediaPController = new MediaPController(this);
+        //Initialize music
+        mediaPController.initMediaPlayer(Endmusic);
+        //End Media
+
         //Intents
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Closes mediaController
+                mediaPController.closeMediaPlayer();
                 //Return to menu
                 setResult(RESULT_OK);
                 finish();
@@ -55,6 +72,8 @@ public class YourScoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                if(saveRanking()) {
+                   //Closes mediaController
+                   mediaPController.closeMediaPlayer();
                    //Open ranking
                    Intent intento = new Intent(YourScoreActivity.this, RankingActivity.class);
                    intento.putExtra("game", game);
