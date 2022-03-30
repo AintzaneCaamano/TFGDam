@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,11 +36,13 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
     private Button btnMi;
     private Button btnFa;
     private TextView txtVScore;
+    private ImageView lifeImg;
 
     //General vars
     // Button colors
     private int [] colors = {RED, BLUE, CYAN, GREEN, YELLOW};
     private int score=0;
+    private int lifes =1;
     private final String GAMETITLE = "SIMON";
     private Context context;
 
@@ -61,6 +64,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
     private  Uri SOUND_RE;
     private  Uri SOUND_MI;
     private  Uri SOUND_FA;
+    private  Uri SOUND_ERROR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
         btnMi = findViewById(R.id.btn_simon_mi);
         btnFa = findViewById(R.id.btn_simon_fa);
         txtVScore = findViewById(R.id.txtV_simon_score);
+        lifeImg = findViewById(R.id.img_simon_heart1);
 
         showScore();
 
@@ -92,6 +97,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
         SOUND_RE = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.re);
         SOUND_MI = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mi);
         SOUND_FA = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.fa);
+        SOUND_ERROR = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.trumpet);
 
         //Initialize mediaPController
         mediaPController = new MediaPController(this);
@@ -170,7 +176,14 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
                 userSequence.add(number);
                 if(!sequenceManager.checkSequence(userSequence)){
                     //If gamer looses, the game ends
-                    continuePlaying=false;
+                    mediaPController.initMediaPlayer(SOUND_ERROR);
+                    lifes=lifes-1;
+                    lifeImg.setVisibility(View.INVISIBLE);
+                    if(lifes<0) {
+                        continuePlaying = false;
+                    }else {
+                        showSequence();
+                    }
                 }else{
                     //If player wins, game keeps going
                     //It shows the score
@@ -289,7 +302,7 @@ public class SimonActivity extends AppCompatActivity  implements View.OnClickLis
     }
     private void showScore(){
         String text =getResources().getString(R.string.txt_yourScore);
-        text=text + ": " + String.valueOf(score);
+        text=text + " " + String.valueOf(score);
         txtVScore.setText(text);
     }
 }
