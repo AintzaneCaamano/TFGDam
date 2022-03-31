@@ -20,6 +20,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import es.gameapp.multigameapp.modelo.Juego;
 import es.gameapp.multigameapp.modelo.Palabra;
 import es.gameapp.multigameapp.modelo.Pregunta;
 
@@ -28,12 +29,14 @@ public class InsertData {
     private DataManager db;
     private ArrayList<Pregunta> arrayPreguntas;
     private ArrayList<Palabra> arrayPalabras;
+    private ArrayList<Juego> arrayJuegos;
 
 
     public InsertData(Context context){
         db = new DataManager(context);
         arrayPreguntas = new ArrayList<>();
         arrayPalabras = new ArrayList<>();
+        arrayJuegos = new ArrayList<>();
     }
 
     public void cargarPreguntasSql(){
@@ -50,6 +53,13 @@ public class InsertData {
         }
     }
 
+    public void cargarJuegosSql(){
+        cargarArrayJuegos();
+        for (Juego juego: arrayJuegos) {
+            db.insertJuego(juego);
+        }
+    }
+
     private void cargarArrayPreguntas(){
         Pregunta pregunta = new Pregunta();
 
@@ -63,6 +73,7 @@ public class InsertData {
         arrayPreguntas.add(pregunta);
 
         //Pregunta2
+        pregunta = new Pregunta();
         pregunta.setTexto("¿La invasión de qué fortaleza es considerada como el punto de inicio de la Revolución Francesa?");
         pregunta.setOpcion1("La Bastilla");
         pregunta.setOpcion2("Castillo de Versalles");
@@ -72,6 +83,7 @@ public class InsertData {
         arrayPreguntas.add(pregunta);
 
         //Pregunta3
+        pregunta = new Pregunta();
         pregunta.setTexto("¿A partir de qué suceso empieza la Edad Media?");
         pregunta.setOpcion1("La Caída del Imperio Romano");
         pregunta.setOpcion2("Descubrimiento de América");
@@ -81,6 +93,7 @@ public class InsertData {
         arrayPreguntas.add(pregunta);
 
         //Pregunta4
+        pregunta = new Pregunta();
         pregunta.setTexto("¿Quién fue el primer presidente de Estados Unidos?");
         pregunta.setOpcion1("George Washington");
         pregunta.setOpcion2("Thomas Jefferson");
@@ -90,6 +103,7 @@ public class InsertData {
         arrayPreguntas.add(pregunta);
 
         //Pregunta5
+        pregunta = new Pregunta();
         pregunta.setTexto("¿Qué filósofo de la Antigua Grecia creía que el elemento del que están compuestas todas las cosas es el agua?");
         pregunta.setOpcion1("Tales de Mileto");
         pregunta.setOpcion2("Pitágoras");
@@ -107,40 +121,82 @@ public class InsertData {
         arrayPalabras.add(palabra);
 
         //Palabra2
+        palabra = new Palabra();
         palabra.setStringPalabra("CAMION");
         arrayPalabras.add(palabra);
 
         //Palabra3
+        palabra = new Palabra();
         palabra.setStringPalabra("ESTUFA");
         arrayPalabras.add(palabra);
 
         //Palabra4
+        palabra = new Palabra();
         palabra.setStringPalabra("LETRERO");
         arrayPalabras.add(palabra);
 
         //Palabra5
+        palabra = new Palabra();
         palabra.setStringPalabra("CEPILLO");
         arrayPalabras.add(palabra);
 
         //Palabra6
+        palabra = new Palabra();
         palabra.setStringPalabra("AGUA");
         arrayPalabras.add(palabra);
 
         //Palabra7
+        palabra = new Palabra();
         palabra.setStringPalabra("VASO");
         arrayPalabras.add(palabra);
 
         //Palabra8
+        palabra = new Palabra();
         palabra.setStringPalabra("PATATA");
         arrayPalabras.add(palabra);
 
         //Palabra9
+        palabra = new Palabra();
         palabra.setStringPalabra("ESCOBA");
         arrayPalabras.add(palabra);
 
         //Palabra10
+        palabra = new Palabra();
         palabra.setStringPalabra("SAL");
         arrayPalabras.add(palabra);
+    }
+
+    private void cargarArrayJuegos(){
+        Juego juego = new Juego();
+
+        //Juego1
+        juego.setNombre("Trivia");
+        arrayJuegos.add(juego);
+
+        //Juego2
+        juego = new Juego();
+        juego.setNombre("Sopa");
+        arrayJuegos.add(juego);
+
+        //Juego3
+        juego = new Juego();
+        juego.setNombre("Simon");
+        arrayJuegos.add(juego);
+
+        //Juego4
+        juego = new Juego();
+        juego.setNombre("Hanoi");
+        arrayJuegos.add(juego);
+
+        //Juego5
+        juego = new Juego();
+        juego.setNombre("Sudoku");
+        arrayJuegos.add(juego);
+
+        //Juego6
+        juego = new Juego();
+        juego.setNombre("BlackJack");
+        arrayJuegos.add(juego);
     }
 
 }

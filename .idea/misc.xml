@@ -18,6 +18,9 @@
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/adapters/activity_layout_score_list.xml" value="0.12284701114488349" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sopa.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_trivia.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/grid_item_sopa.xml" value="0.11125126135216952" />
       </map>
     </option>
   </component>

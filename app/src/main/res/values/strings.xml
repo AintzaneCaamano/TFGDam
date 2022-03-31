@@ -2,6 +2,13 @@
     <string name="app_name">MultiGameApp</string>
     <string name="txt_return">Volver al Menú</string>
     <string name="txt_save">Guardar</string>
-    <string name="txt_yourScore">Tu puntuación</string>
+    <string name="txt_yourScore">SCORE:</string>
     <string name="txt_info">info</string>
+    <string name="txt_fallos">FALLOS:</string>
+    <string name="stringCorrecto">¡CORRECTO!</string>
+    <string name="stringIncorrecto">Respuesta INCORRECTA</string>
+    <string name="stringPartidaTerminada">Partida Terminada</string>
+    <string name="stringMensajePartidaTerminada">Has alcanzado el límite de FALLOS</string>
+    <string name="stringReiniciar">Volver a jugar</string>
+    <string name="stringVolverMenu">Volver al Menu Principal</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import es.gameapp.multigameapp.extras.DataManager;
 import es.gameapp.multigameapp.extras.InsertData;
+import es.gameapp.multigameapp.trivia.TriviaActivity;
 
 public class MainActivity extends AppCompatActivity {
     //This activity starts the app
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Temporal button for intents
-    private Button btn;
+    private Button btn, button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         cargarBaseDatos(MainActivity.this);
 
         btn = findViewById(R.id.btn_temporal_return);
+        button = findViewById(R.id.button);
+
+        button.setOnClickListener(v -> {
+            Intent intento = new Intent(MainActivity.this, TriviaActivity.class);
+            startActivity(intento);
+        });
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
     private void cargarBaseDatos(Context context){
         if(db.isEmpty()){
             InsertData insert = new InsertData(context);
+
+            insert.cargarJuegosSql();
             insert.cargarPreguntasSql();
-            insert.cargarPalabrasSql();
+            //insert.cargarPalabrasSql();
+
         }
     }
 }

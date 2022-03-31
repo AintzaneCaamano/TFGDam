@@ -79,7 +79,7 @@ public class DataManager extends SQLiteOpenHelper {
 
 
     // TABLA SOPAS
-    public static final String TABLE_NAME_SOPAS = "Scores";
+    public static final String TABLE_NAME_SOPAS = "Sopas";
 
     // Table columns
     private static final String ID_SOPA = "id";
@@ -463,7 +463,6 @@ public class DataManager extends SQLiteOpenHelper {
             // Nothing to do here...
         } finally {
             try {
-                assert cursor != null;
                 cursor.close();
             } catch (Exception e) {
                 // Nothing to do here...
