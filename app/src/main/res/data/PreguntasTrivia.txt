@@ -1,5 +1,0 @@
-1;¿Quién fue el primer presidente de la democracia española tras el franquismo?;Adolfo Suarez;Jose Maria Aznar;Jesús Gil;Pedro Sánchez;Adolfo Suarez
-2;¿La invasión de qué fortaleza es considerada como el punto de inicio de la Revolución Francesa?;La Bastilla;Castillo de Versalles;Fontainebleau;Castillo de Cheverny;La Bastilla
-3;¿A partir de qué suceso empieza la Edad Media?;Caída del Imperio Romano;Descubrimiento de América;Caída del Imperio Mongol;Construcción de la Gran Muralla China;Caída del Imperio Romano
-4;¿Quién fue el primer presidente de Estados Unidos?;George Washington;Thomas Jefferson;John Adams;Andrew Jackson;George Washington
-5;¿Qué filósofo de la Antigua Grecia creía que el elemento del que están compuestas todas las cosas es el agua?;Tales de Mileto;Pitágoras;Aristóteles;Arquímedes;Tales de Mileto
