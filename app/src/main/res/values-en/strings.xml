@@ -7,5 +7,5 @@
     <string name="txt_yourScore">Your score:</string>
     <string name="txt_save">Save</string>
     <string name="txt_return">Back to menu</string>
-    <string name="toast_UserLength">A nickname is needed. It must be 3 letters long at least</string>
+    <string name="toast_UserLength">A nickname is needed. It must be 4 letters long at least</string>
 </resources>

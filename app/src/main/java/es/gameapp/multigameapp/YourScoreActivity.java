@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import es.gameapp.multigameapp.database.DBManager;
+import es.gameapp.multigameapp.database.Score;
 import es.gameapp.multigameapp.media.MediaPController;
 import es.gameapp.multigameapp.simon.SimonActivity;
 
@@ -23,6 +25,7 @@ public class YourScoreActivity extends AppCompatActivity {
     private String user;
     private String game;
     private int score;
+    private DBManager db;
 
     //Media
     private MediaPController mediaPController;
@@ -47,6 +50,9 @@ public class YourScoreActivity extends AppCompatActivity {
         txtVGameName.setText(game);
         txtVScore.setText(String.valueOf(score));
 
+        //DB
+        db= new DBManager(this);
+        //db.onUpgrade(db.getWritableDatabase(),1,2);
         //Media
         //Initialize Uris
         Uri Endmusic = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.grand_final_orchestral);
@@ -89,6 +95,9 @@ public class YourScoreActivity extends AppCompatActivity {
     private boolean saveRanking(){
         user = txtVPlayerName.getText().toString();
         if (user.length()>3) {
+            String stScore = String.valueOf(score);
+            Score scoreObject= new Score(user, stScore, game);
+            db.insert(scoreObject);
             return true;
         }else {
             String text = getResources().getString(R.string.toast_UserLength);
