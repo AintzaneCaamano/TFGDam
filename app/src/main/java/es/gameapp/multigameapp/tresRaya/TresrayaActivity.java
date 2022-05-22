@@ -37,6 +37,7 @@ public class TresrayaActivity extends AppCompatActivity implements View.OnClickL
     //General vars
     private boolean continuePlaying;
     private int score=0;
+    private int moves=0;
     private final String GAMETITLE = "TRESRAYA";
     private Context context;
     private final String PLAYERA = "X";
@@ -65,7 +66,7 @@ public class TresrayaActivity extends AppCompatActivity implements View.OnClickL
         btnC1 = findViewById(R.id.btn_tresraya_c1);
         btnC2 = findViewById(R.id.btn_tresraya_c2);
         btnC3 = findViewById(R.id.btn_tresraya_c3);
-
+        txtVScore = findViewById(R.id.txtV_tresraya_score);
 
         //game Buttons OnClickListener
         btnA1.setOnClickListener(this);
@@ -80,9 +81,12 @@ public class TresrayaActivity extends AppCompatActivity implements View.OnClickL
 
         //init vars
         continuePlaying=true;
+        score = 300;
         //Fills matrix array
         initMatrix();
         initBtnList();
+
+        showScore();
 
         //Onclick for the intents to other activities
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +156,12 @@ public class TresrayaActivity extends AppCompatActivity implements View.OnClickL
                 matrix[2][2] = text;
                 btnList[2][2].setText(text);
             }
+            //Count number of moves
+            moves++;
+            if (moves >3){
+                score= score -100;
+                showScore();
+            }
             //This disables the button
             v.setEnabled(false);
             //This checks the button
@@ -178,6 +188,12 @@ public class TresrayaActivity extends AppCompatActivity implements View.OnClickL
         btnList[0][2] = btnC1;
         btnList[1][2] = btnC2;
         btnList[2][2] = btnC3;
+    }
+
+    private void showScore(){
+        //Show score in screen
+        String showScore = getResources().getString(R.string.txt_yourScore) + " " + String.valueOf(score);
+        txtVScore.setText(showScore);
     }
 
     private void cleanButtons(){
