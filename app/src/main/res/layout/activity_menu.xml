@@ -7,85 +7,98 @@
     tools:context=".MenuActivity">
 
     <Button
-        android:id="@+id/btn_menu_return"
-        android:layout_width="172dp"
-        android:layout_height="65dp"
-        android:text="@string/txt_return"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
-
-    <Button
         android:id="@+id/btn_menu_trivia"
         android:layout_width="172dp"
-        android:layout_height="65dp"
+        android:layout_height="165dp"
         android:text="trivial"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.104"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintVertical_bias="0.336" />
+
+    <Button
+        android:id="@+id/btn_menu_sopa"
+        android:layout_width="172dp"
+        android:layout_height="165dp"
+        android:text="sopa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.644" />
+
+    <Button
+        android:id="@+id/btn_menu_hanoi"
+        android:layout_width="172dp"
+        android:layout_height="165dp"
+        android:text="hanoi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.951" />
+
+    <Button
+        android:id="@+id/btn_menu_black"
+        android:layout_width="172dp"
+        android:layout_height="165dp"
+        android:text="black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028" />
 
     <Button
         android:id="@+id/btn_menu_sudoku"
         android:layout_width="172dp"
-        android:layout_height="65dp"
+        android:layout_height="165dp"
         android:text="sudoku"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.878"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
-
-    <Button
-        android:id="@+id/btn_menu_sopa"
-        android:layout_width="172dp"
-        android:layout_height="65dp"
-        android:text="sopa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.789" />
+        app:layout_constraintVertical_bias="0.336" />
 
     <Button
         android:id="@+id/btn_menu_simon"
         android:layout_width="172dp"
-        android:layout_height="65dp"
+        android:layout_height="165dp"
         android:text="simon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804" />
-
-    <Button
-        android:id="@+id/btn_menu_hanoi"
-        android:layout_width="172dp"
-        android:layout_height="65dp"
-        android:text="hanoi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
-
-    <Button
-        android:id="@+id/btn_menu_black"
-        android:layout_width="172dp"
-        android:layout_height="65dp"
-        android:text="black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.878"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.644" />
+
+    <Button
+        android:id="@+id/btn_menu_return"
+        android:layout_width="172dp"
+        android:layout_height="165dp"
+        android:text="@string/txt_return"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.951" />
+
+    <Button
+        android:id="@+id/btn_menu_tresraya"
+        android:layout_width="172dp"
+        android:layout_height="165dp"
+        android:text="tres en raya"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028" />
 </androidx.constraintlayout.widget.ConstraintLayout>

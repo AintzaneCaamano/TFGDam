@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InfoActivity">
+
     <Button
         android:id="@+id/btn_info_return"
         android:layout_width="172dp"
         android:layout_height="65dp"
-        android:text="@string/txt_return"
+        android:text="@string/txt_returnGame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"

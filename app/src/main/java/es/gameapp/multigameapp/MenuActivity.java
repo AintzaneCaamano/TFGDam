@@ -14,6 +14,7 @@ import es.gameapp.multigameapp.hanoi.HanoyActivity;
 import es.gameapp.multigameapp.simon.SimonActivity;
 import es.gameapp.multigameapp.sopa.SopaActivity;
 import es.gameapp.multigameapp.sudoku.SudokuActivity;
+import es.gameapp.multigameapp.tresRaya.TresrayaActivity;
 import es.gameapp.multigameapp.trivia.TriviaActivity;
 
 public class MenuActivity extends AppCompatActivity {
@@ -24,7 +25,7 @@ public class MenuActivity extends AppCompatActivity {
     private Button btnSopa;
     private Button btnSudoku;
     private Button btnTrivia;
-
+    private Button btnTres;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class MenuActivity extends AppCompatActivity {
         btnSopa = findViewById(R.id.btn_menu_sopa);
         btnSudoku = findViewById(R.id.btn_menu_sudoku);
         btnTrivia = findViewById(R.id.btn_menu_trivia);
+        btnTres = findViewById(R.id.btn_menu_tresraya);
 
         //Intents
         btnBlack.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +78,13 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(MenuActivity.this, TriviaActivity.class);
+                startActivity(intento);
+            }
+        });
+        btnTres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intento = new Intent(MenuActivity.this, TresrayaActivity.class);
                 startActivity(intento);
             }
         });
