@@ -82,13 +82,17 @@ public class DataManager extends SQLiteOpenHelper {
     public static final String TABLE_NAME_SOPAS = "Sopas";
 
     // Table columns
-    private static final String ID_SOPA = "id";
-    private static final String STRING_IMAGEN_SOPA = "imageBase64";
+    private static final String ID_SOPA = "idSopa";
+    private static final String TEMATICA = "tematica";
+    private static final String ARRAY_SOPA = "arraySopa";
+    private static final String ARRAY_PALABRAS = "arrayPalabras";
 
     // Creating table query
     private static final String CREATE_TABLE_SOPAS = "create table " + TABLE_NAME_SOPAS + "(" +
             ID_SOPA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            STRING_IMAGEN_SOPA + " TEXT " +
+            TEMATICA + " TEXT, " +
+            ARRAY_SOPA + " TEXT, " +
+            ARRAY_PALABRAS + " TEXT " +
             ");";
 
     // TABLA PALABRAS
@@ -156,6 +160,27 @@ public class DataManager extends SQLiteOpenHelper {
         return ret;
     }
 
+    //------------------------------ selectAllSopas ------------------------------//
+
+    public ArrayList<Sopa> selectAllSopas() {
+        ArrayList<Sopa> ret = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME_SOPAS;
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
+        Sopa sopa;
+        while (cursor.moveToNext()) {
+            sopa = new Sopa();
+            sopa.setIdSopa(cursor.getInt(0));
+            sopa.setTematica(cursor.getString(1));
+            sopa.setStringSopa(cursor.getString(2));
+            sopa.setStringArrayPalabras(cursor.getString(3));
+            ret.add(sopa);
+        }
+        cursor.close();
+        sQLiteDatabase.close();
+        return ret;
+    }
+
     //------------------------------ SelectSopa by Id ------------------------------//
 
     public Sopa selectSopaById (int id) {
@@ -169,7 +194,9 @@ public class DataManager extends SQLiteOpenHelper {
             cursor.moveToFirst();
             sopa = new Sopa();
             sopa.setIdSopa(cursor.getInt(0));
-            sopa.setStringSopaBase64(cursor.getString(1));
+            sopa.setTematica(cursor.getString(1));
+            sopa.setStringSopa(cursor.getString(2));
+            sopa.setStringArrayPalabras(cursor.getString(3));
             cursor.close();
         } else {
             sopa = null;
@@ -285,7 +312,9 @@ public class DataManager extends SQLiteOpenHelper {
 
     public void insertSopa(Sopa sopa) {
         ContentValues values = new ContentValues();
-        values.put(STRING_IMAGEN_SOPA, sopa.getStringSopaBase64());
+        values.put(TEMATICA, sopa.getTematica());
+        values.put(ARRAY_SOPA, sopa.getStringSopa());
+        values.put(ARRAY_PALABRAS, sopa.getStringArrayPalabras());
 
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         sQLiteDatabase.insert(TABLE_NAME_SOPAS, null, values);
@@ -350,7 +379,9 @@ public class DataManager extends SQLiteOpenHelper {
     public boolean updateSopa(Sopa sopa) {
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         ContentValues args = new ContentValues();
-        args.put(STRING_IMAGEN_SOPA, sopa.getStringSopaBase64());
+        args.put(TEMATICA, sopa.getTematica());
+        args.put(ARRAY_SOPA, sopa.getStringSopa());
+        args.put(ARRAY_PALABRAS, sopa.getStringArrayPalabras());
 
 
 

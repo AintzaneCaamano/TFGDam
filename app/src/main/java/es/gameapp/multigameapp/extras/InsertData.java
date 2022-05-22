@@ -23,6 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import es.gameapp.multigameapp.modelo.Juego;
 import es.gameapp.multigameapp.modelo.Palabra;
 import es.gameapp.multigameapp.modelo.Pregunta;
+import es.gameapp.multigameapp.modelo.Sopa;
 
 public class InsertData {
 
@@ -30,6 +31,7 @@ public class InsertData {
     private ArrayList<Pregunta> arrayPreguntas;
     private ArrayList<Palabra> arrayPalabras;
     private ArrayList<Juego> arrayJuegos;
+    private ArrayList<Sopa> arraySopas;
 
 
     public InsertData(Context context){
@@ -37,6 +39,7 @@ public class InsertData {
         arrayPreguntas = new ArrayList<>();
         arrayPalabras = new ArrayList<>();
         arrayJuegos = new ArrayList<>();
+        arraySopas = new ArrayList<>();
     }
 
     public void cargarPreguntasSql(){
@@ -57,6 +60,13 @@ public class InsertData {
         cargarArrayJuegos();
         for (Juego juego: arrayJuegos) {
             db.insertJuego(juego);
+        }
+    }
+
+    public void cargarSopasSql(){
+        cargarArraySopas();
+        for (Sopa sopa: arraySopas) {
+            db.insertSopa(sopa);
         }
     }
 
@@ -199,4 +209,12 @@ public class InsertData {
         arrayJuegos.add(juego);
     }
 
+    private void cargarArraySopas() {
+        Sopa sopa = new Sopa();
+
+        sopa.setTematica("Planetas del Sistema Solar");
+        sopa.setStringSopa("NNIUOSO OMETRAM TZRNBTU UEORAUR LTIERRA PEIEUNN SUNEVOO");
+        sopa.setStringArrayPalabras("TIERRA;MARTE;VENUS;PLUTON;URANO;SATURNO");
+        arraySopas.add(sopa);
+    }
 }

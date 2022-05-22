@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.2625" />
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/activity_black.xml" value="0.12183383991894631" />
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/activity_hanoy.xml" value="0.12183383991894631" />
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/activity_info.xml" value="0.12183383991894631" />
@@ -18,7 +19,7 @@
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/adapters/activity_layout_score_list.xml" value="0.12284701114488349" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_sopa.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sopa.xml" value="0.25248870849609373" />
         <entry key="app/src/main/res/layout/activity_trivia.xml" value="0.25" />
         <entry key="app/src/main/res/layout/grid_item_sopa.xml" value="0.11125126135216952" />
       </map>

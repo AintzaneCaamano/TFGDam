@@ -5,6 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".sopa.SopaActivity">
+
+    <TextView
+        android:id="@+id/textViewStringIntentos2"
+        android:layout_width="94dp"
+        android:layout_height="40dp"
+        android:text="@string/txt_fallos"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.753"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.123" />
+
+    <TextView
+        android:id="@+id/textViewTituloSopa"
+        android:layout_width="254dp"
+        android:layout_height="40dp"
+        android:text="TextViewTitulo"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.053" />
+
+    <TextView
+        android:id="@+id/textViewScoreSopa"
+        android:layout_width="94dp"
+        android:layout_height="40dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.124" />
+
+    <TextView
+        android:id="@+id/textViewIntentosSopa"
+        android:layout_width="62dp"
+        android:layout_height="36dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.123" />
+
+    <TextView
+        android:id="@+id/textViewStringScore2"
+        android:layout_width="94dp"
+        android:layout_height="40dp"
+        android:text="@string/txt_yourScore"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125" />
+
     <Button
         android:id="@+id/btn_sopa_return"
         android:layout_width="172dp"
@@ -40,12 +121,235 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.042" />
 
-    <GridView
-        android:layout_width="409dp"
-        android:layout_height="540dp"
+    <EditText
+        android:id="@+id/editTextPalabra"
+        android:layout_width="206dp"
+        android:layout_height="64dp"
+        android:ems="10"
+        android:hint="@string/Tu_Palabra"
+        android:inputType="textPersonName"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.413" />
+        app:layout_constraintVertical_bias="0.81" />
+
+    <Button
+        android:id="@+id/buttonComprobarPalabra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Comprobar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
+
+    <TextView
+        android:id="@+id/textViewLinea1"
+        android:layout_width="282dp"
+        android:layout_height="40dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:letterSpacing="1"
+        android:text="1234567"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/textViewLinea4"
+        android:layout_width="282dp"
+        android:layout_height="40dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:letterSpacing="1"
+        android:text="1234567"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLinea3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewLinea6"
+        android:layout_width="282dp"
+        android:layout_height="40dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:letterSpacing="1"
+        android:text="1234567"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLinea5"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewLinea7"
+        android:layout_width="282dp"
+        android:layout_height="40dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:letterSpacing="1"
+        android:text="1234567"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLinea6"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewLinea5"
+        android:layout_width="282dp"
+        android:layout_height="40dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:letterSpacing="1"
+        android:text="1234567"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLinea4"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewLinea2"
+        android:layout_width="282dp"
+        android:layout_height="40dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:letterSpacing="1"
+        android:text="1234567"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLinea1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewLinea3"
+        android:layout_width="282dp"
+        android:layout_height="40dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:letterSpacing="1"
+        android:text="1234567"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLinea2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPalabra1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.253" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPalabra4"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.464" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPalabra5"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.534" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPalabra2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.323" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPalabra3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.393" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPalabra6"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.604" />
+
+    <TextView
+        android:id="@+id/textViewTematica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tematica"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.195" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

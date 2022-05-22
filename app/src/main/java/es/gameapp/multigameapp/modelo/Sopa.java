@@ -5,17 +5,17 @@ import java.util.ArrayList;
 public class Sopa {
 
     private int idSopa;
-    private String stringSopaBase64;
-    private ArrayList<Palabra> arrayPalabras;
+    private String tematica, stringSopa, stringArrayPalabras;
 
     public Sopa(){
 
     }
 
-    public Sopa(int idSopa, String stringSopaBase64, ArrayList<Palabra> arrayPalabras) {
+    public Sopa(int idSopa, String tematica, String stringSopa, String stringArrayPalabras) {
         this.idSopa = idSopa;
-        this.stringSopaBase64 = stringSopaBase64;
-        this.arrayPalabras = arrayPalabras;
+        this.tematica = tematica;
+        this.stringSopa = stringSopa;
+        this.stringArrayPalabras = stringArrayPalabras;
     }
 
     public int getIdSopa() {
@@ -26,19 +26,27 @@ public class Sopa {
         this.idSopa = idSopa;
     }
 
-    public String getStringSopaBase64() {
-        return stringSopaBase64;
+    public String getTematica() {
+        return tematica;
     }
 
-    public void setStringSopaBase64(String stringSopaBase64) {
-        this.stringSopaBase64 = stringSopaBase64;
+    public void setTematica(String tematica) {
+        this.tematica = tematica;
     }
 
-    public ArrayList<Palabra> getArrayPalabras() {
-        return arrayPalabras;
+    public String getStringSopa() {
+        return stringSopa;
     }
 
-    public void setArrayPalabras(ArrayList<Palabra> arrayPalabras) {
-        this.arrayPalabras = arrayPalabras;
+    public void setStringSopa(String stringSopa) {
+        this.stringSopa = stringSopa;
+    }
+
+    public String getStringArrayPalabras() {
+        return stringArrayPalabras;
+    }
+
+    public void setStringArrayPalabras(String stringArrayPalabras) {
+        this.stringArrayPalabras = stringArrayPalabras;
     }
 }

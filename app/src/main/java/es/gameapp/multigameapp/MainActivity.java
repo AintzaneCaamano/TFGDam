@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import es.gameapp.multigameapp.extras.DataManager;
 import es.gameapp.multigameapp.extras.InsertData;
+import es.gameapp.multigameapp.sopa.SopaActivity;
 import es.gameapp.multigameapp.trivia.TriviaActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Temporal button for intents
-    private Button btn, button;
+    private Button btn, button, button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn = findViewById(R.id.btn_temporal_return);
         button = findViewById(R.id.button);
+        button2 = findViewById(R.id.button2);
 
         button.setOnClickListener(v -> {
             Intent intento = new Intent(MainActivity.this, TriviaActivity.class);
@@ -44,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 openActivity();
             }
+        });
+
+        button2.setOnClickListener(v -> {
+            Intent intento = new Intent(MainActivity.this, SopaActivity.class);
+            startActivity(intento);
         });
     }
 
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             insert.cargarJuegosSql();
             insert.cargarPreguntasSql();
             //insert.cargarPalabrasSql();
-
+            insert.cargarSopasSql();
         }
     }
 }

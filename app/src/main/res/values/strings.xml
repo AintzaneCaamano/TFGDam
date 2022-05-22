@@ -11,4 +11,7 @@
     <string name="stringMensajePartidaTerminada">Has alcanzado el límite de FALLOS</string>
     <string name="stringReiniciar">Volver a jugar</string>
     <string name="stringVolverMenu">Volver al Menu Principal</string>
+    <string name="Tu_Palabra">Tu Palabra</string>
+    <string name="Comprobar">Comprobar</string>
+    <string name="stringPartidaGanada">¡HAS GANADO LA PARTIDA!</string>
 </resources>
