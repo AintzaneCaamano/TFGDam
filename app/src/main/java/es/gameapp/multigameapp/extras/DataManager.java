@@ -5,62 +5,110 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
-/*
-import modelo.Tarea;
-import modelo.Usuario;
+
+import es.gameapp.multigameapp.modelo.Juego;
+import es.gameapp.multigameapp.modelo.Palabra;
+import es.gameapp.multigameapp.modelo.Pregunta;
+import es.gameapp.multigameapp.modelo.Score;
+import es.gameapp.multigameapp.modelo.Sopa;
 
 /**
  * Wraps the logic for a SQLite database
  */
-/*public class DataManager extends SQLiteOpenHelper {
+public class DataManager extends SQLiteOpenHelper {
 
     // Database Information
-    private static final String DB_NAME = "agendaTareas.db";
+    private static final String DB_NAME = "multijuegos.db";
 
     // Database version
     private static final int DB_VERSION = 1;
 
-    // Table Name
-    public static final String TABLE_NAME_USUARIO = "Usuario";
+    // TABLA PREGUNTAS
+    public static final String TABLE_NAME_PREGUNTAS_TRIVIA = "Preguntas";
 
     // Table columns
-    private static final String ID_USUARIO = "id";
-    private static final String NOMBRE = "nombre";
-    private static final String PASSWORD = "password";
-
+    private static final String ID_PREGUNTA = "id";
+    private static final String TEXTO = "texto";
+    private static final String OPCION1 = "opcion1";
+    private static final String OPCION2 = "opcion2";
+    private static final String OPCION3 = "opcion3";
+    private static final String OPCION4 = "opcion4";
+    private static final String RESPUESTA = "respuesta";
 
     // Creating table query
-    private static final String CREATE_TABLE_USUARIOS = "create table " + TABLE_NAME_USUARIO + "(" +
-            ID_USUARIO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            NOMBRE + " TEXT, " +
-            PASSWORD + " TEXT " +
+    private static final String CREATE_TABLE_PREGUNTAS = "create table " + TABLE_NAME_PREGUNTAS_TRIVIA + "(" +
+            ID_PREGUNTA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            TEXTO + " TEXT, " +
+            OPCION1 + " TEXT, " +
+            OPCION2 + " TEXT, " +
+            OPCION3 + " TEXT, " +
+            OPCION4 + " TEXT, " +
+            RESPUESTA + " TEXT " +
             ");";
 
-    // Table Name
-    public static final String TABLE_NAME_TAREA = "Tarea";
+    // TABLA JUEGOS
+    public static final String TABLE_NAME_JUEGOS = "Juegos";
 
     // Table columns
-    private static final String ID_TAREA = "id";
-    private static final String NOMBRE_TAREA = "nombre";
-    private static final String DESCRIPCION = "descripcion";
-    private static final String FECHA = "fecha";
-    private static final String COSTE = "coste";
-    private static final String PRIORIDAD = "prioridad";
-    private static final String REALIZADO = "realizado";
-    private static final String ID_USUARIO_FK = "id_usuario";
+    private static final String ID_JUEGO = "id";
+    private static final String NOMBRE_JUEGO = "nombre";
 
-    private static final String CREATE_TABLE_TAREAS = "create table " + TABLE_NAME_TAREA + "(" +
-            ID_TAREA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            ID_USUARIO_FK + " TEXT, " +
-            NOMBRE_TAREA + " TEXT, " +
-            DESCRIPCION + " TEXT, " +
-            FECHA + " TEXT, " +
-            COSTE + " TEXT, " +
-            PRIORIDAD + " TEXT, " +
-            REALIZADO + " INTEGER, " +
-            " FOREIGN KEY ("+ID_USUARIO_FK+") REFERENCES "+TABLE_NAME_USUARIO+"("+ID_USUARIO+"));";
+    // Creating table query
+    private static final String CREATE_TABLE_JUEGOS = "create table " + TABLE_NAME_JUEGOS + "(" +
+            ID_JUEGO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            NOMBRE_JUEGO + " TEXT " +
+            ");";
+
+    // TABLA SCORES
+    public static final String TABLE_NAME_SCORES = "Scores";
+
+    // Table columns
+    private static final String ID_SCORE = "id";
+    private static final String ID_JUEGO_FK = "id_juego";
+    private static final String PLAYER = "player";
+    private static final String SCORE = "score";
+
+    //table query
+    private static final String CREATE_TABLE_SCORES = "create table " + TABLE_NAME_SCORES + "(" +
+            ID_SCORE + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            ID_JUEGO_FK + " TEXT, " +
+            PLAYER + " TEXT, " +
+            SCORE + " TEXT, " +
+            " FOREIGN KEY ("+ID_JUEGO_FK+") REFERENCES "+TABLE_NAME_JUEGOS+"("+ID_JUEGO+"));";
+
+
+    // TABLA SOPAS
+    public static final String TABLE_NAME_SOPAS = "Sopas";
+
+    // Table columns
+    private static final String ID_SOPA = "idSopa";
+    private static final String TEMATICA = "tematica";
+    private static final String ARRAY_SOPA = "arraySopa";
+    private static final String ARRAY_PALABRAS = "arrayPalabras";
+
+    // Creating table query
+    private static final String CREATE_TABLE_SOPAS = "create table " + TABLE_NAME_SOPAS + "(" +
+            ID_SOPA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            TEMATICA + " TEXT, " +
+            ARRAY_SOPA + " TEXT, " +
+            ARRAY_PALABRAS + " TEXT " +
+            ");";
+
+    // TABLA PALABRAS
+    public static final String TABLE_NAME_PALABRAS_SOPA = "Palabras";
+
+    // Table columns
+    private static final String ID_PALABRA = "id";
+    private static final String STRING_PALABRA = "palabra";
+    private static final String ID_SOPA_FK = "id_sopa";
+
+    private static final String CREATE_TABLE_PALABRAS = "create table " + TABLE_NAME_PALABRAS_SOPA + "(" +
+            ID_PALABRA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            ID_SOPA_FK + " TEXT, " +
+            STRING_PALABRA + " TEXT, " +
+            " FOREIGN KEY ("+ID_SOPA_FK+") REFERENCES "+TABLE_NAME_SOPAS+"("+ID_SOPA+"));";
+
 
     private final Context context;
 
@@ -71,314 +119,332 @@ import modelo.Usuario;
 
     @Override
     public void onCreate(SQLiteDatabase sQLiteDatabase) {
-        sQLiteDatabase.execSQL(CREATE_TABLE_USUARIOS);
-        sQLiteDatabase.execSQL(CREATE_TABLE_TAREAS);
+        sQLiteDatabase.execSQL(CREATE_TABLE_JUEGOS);
+        sQLiteDatabase.execSQL(CREATE_TABLE_SOPAS);
+        sQLiteDatabase.execSQL(CREATE_TABLE_PREGUNTAS);
+        sQLiteDatabase.execSQL(CREATE_TABLE_PALABRAS);
+        sQLiteDatabase.execSQL(CREATE_TABLE_SCORES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sQLiteDatabase, int oldVersion, int newVersion) {
-        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_TAREA);
-        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USUARIO);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_JUEGOS);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SOPAS);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PREGUNTAS_TRIVIA);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_PALABRAS_SOPA);
+        sQLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SCORES);
         onCreate(sQLiteDatabase);
     }
 
-    //------------------------------ selectAllUsuarios ------------------------------//
+    //------------------------------ selectAllPreguntas ------------------------------//
 
-    public ArrayList<Usuario> selectAllUsuarios () {
-        ArrayList<Usuario> ret = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE_NAME_USUARIO;
+    public ArrayList<Pregunta> selectAllPreguntas() {
+        ArrayList<Pregunta> ret = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME_PREGUNTAS_TRIVIA;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
-        Usuario usuario;
+        Pregunta pregunta;
         while (cursor.moveToNext()) {
-            usuario = new Usuario();
-            usuario.setId(cursor.getInt(0));
-            usuario.setNombreUsuario(cursor.getString(1));
-            usuario.setPassword(cursor.getString(2));
-            ret.add(usuario);
+            pregunta = new Pregunta();
+            pregunta.setIdPregunta(cursor.getInt(0));
+            pregunta.setTexto(cursor.getString(1));
+            pregunta.setOpcion1(cursor.getString(2));
+            pregunta.setOpcion2(cursor.getString(3));
+            pregunta.setOpcion3(cursor.getString(4));
+            pregunta.setOpcion4(cursor.getString(5));
+            pregunta.setRespuesta(cursor.getString(6));
+            ret.add(pregunta);
         }
         cursor.close();
         sQLiteDatabase.close();
         return ret;
     }
 
-    //------------------------------ selectAllTareas ------------------------------//
+    //------------------------------ selectAllSopas ------------------------------//
 
-    public ArrayList<Tarea> selectAllTareas () {
-        ArrayList<Tarea> ret = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE_NAME_TAREA;
+    public ArrayList<Sopa> selectAllSopas() {
+        ArrayList<Sopa> ret = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME_SOPAS;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
-        Tarea tarea;
+        Sopa sopa;
         while (cursor.moveToNext()) {
-            tarea = new Tarea();
-            tarea.setId(cursor.getInt(0));
-            tarea.setIdUsuarioFk(cursor.getInt(1));
-            tarea.setNombreTarea(cursor.getString(2));
-            tarea.setDescripcion(cursor.getString(3));
-            tarea.setFecha(cursor.getString(4));
-            tarea.setCoste(Integer.parseInt(cursor.getString(5)));
-            tarea.setPrioridad(cursor.getString(6));
-            tarea.setRealizado(Integer.parseInt(cursor.getString(7)));
-
-            ret.add(tarea);
+            sopa = new Sopa();
+            sopa.setIdSopa(cursor.getInt(0));
+            sopa.setTematica(cursor.getString(1));
+            sopa.setStringSopa(cursor.getString(2));
+            sopa.setStringArrayPalabras(cursor.getString(3));
+            ret.add(sopa);
         }
         cursor.close();
         sQLiteDatabase.close();
         return ret;
     }
 
-    //------------------------------ selectAllTareasByUsuario ------------------------------//
+    //------------------------------ SelectSopa by Id ------------------------------//
 
-    public ArrayList<Tarea> selectAllTareasByUsuario (int idUsuario) {
-        ArrayList<Tarea> ret = new ArrayList<>();
-        String query = "Select * FROM " + TABLE_NAME_TAREA + " WHERE " + ID_TAREA +
-                " = " + "'" + ID_USUARIO_FK + "'";
-        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
-        Tarea tarea;
-        while (cursor.moveToNext()) {
-            tarea = new Tarea();
-            tarea.setId(cursor.getInt(0));
-            tarea.setIdUsuarioFk(cursor.getInt(1));
-            tarea.setNombreTarea(cursor.getString(2));
-            tarea.setDescripcion(cursor.getString(3));
-            tarea.setFecha(cursor.getString(4));
-            tarea.setCoste(Integer.parseInt(cursor.getString(5)));
-            tarea.setPrioridad(cursor.getString(6));
-            tarea.setRealizado(Integer.parseInt(cursor.getString(7)));
-
-            ret.add(tarea);
-        }
-        cursor.close();
-        sQLiteDatabase.close();
-        return ret;
-    }
-
-    //------------------------------ selectAllTareasRealizadasByUsuario ------------------------------//
-
-    public ArrayList<Tarea> selectAllTareasRealizadasByUsuario (int idUsuario) {
-        ArrayList<Tarea> ret = new ArrayList<>();
-        String query = "Select * FROM " + TABLE_NAME_TAREA + " WHERE " + ID_USUARIO_FK +
-                "=" + "'" + idUsuario + "'" + " and " + REALIZADO + "='1'";
-        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
-        Tarea tarea;
-        while (cursor.moveToNext()) {
-            tarea = new Tarea();
-            tarea.setId(cursor.getInt(0));
-            tarea.setIdUsuarioFk(cursor.getInt(1));
-            tarea.setNombreTarea(cursor.getString(2));
-            tarea.setDescripcion(cursor.getString(3));
-            tarea.setFecha(cursor.getString(4));
-            tarea.setCoste(Integer.parseInt(cursor.getString(5)));
-            tarea.setPrioridad(cursor.getString(6));
-            tarea.setRealizado(Integer.parseInt(cursor.getString(7)));
-
-            ret.add(tarea);
-        }
-        cursor.close();
-        sQLiteDatabase.close();
-        return ret;
-    }
-
-    //------------------------------ selectAllTareasPendientesByUsuario ------------------------------//
-
-    public ArrayList<Tarea> selectAllTareasPendientesByUsuario (int idUsuario) {
-        ArrayList<Tarea> ret = new ArrayList<>();
-        String query = "Select * FROM " + TABLE_NAME_TAREA + " WHERE " + ID_USUARIO_FK +
-                " = " + "'" + idUsuario + "'" + " and " +  REALIZADO +  "='0'" ;
-        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
-        Tarea tarea;
-        while (cursor.moveToNext()) {
-            tarea = new Tarea();
-            tarea.setId(cursor.getInt(0));
-            tarea.setIdUsuarioFk(cursor.getInt(1));
-            tarea.setNombreTarea(cursor.getString(2));
-            tarea.setDescripcion(cursor.getString(3));
-            tarea.setFecha(cursor.getString(4));
-            tarea.setCoste(Integer.parseInt(cursor.getString(5)));
-            tarea.setPrioridad(cursor.getString(6));
-            tarea.setRealizado(Integer.parseInt(cursor.getString(7)));
-
-            ret.add(tarea);
-        }
-        cursor.close();
-        sQLiteDatabase.close();
-        return ret;
-    }
-
-    //------------------------------ SelectUsuario by Id ------------------------------//
-
-    public Usuario selectUsuarioById (int id) {
-        String query = "Select * FROM " + TABLE_NAME_USUARIO + " WHERE " + ID_USUARIO +
+    public Sopa selectSopaById (int id) {
+        String query = "Select * FROM " + TABLE_NAME_SOPAS + " WHERE " + ID_SOPA +
                 " = " + "'" + id + "'";
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
 
-        Usuario usuario;
+        Sopa sopa;
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            usuario = new Usuario();
-            usuario.setId(cursor.getInt(0));
-            usuario.setNombreUsuario(cursor.getString(1));
-            usuario.setPassword(cursor.getString(2));
+            sopa = new Sopa();
+            sopa.setIdSopa(cursor.getInt(0));
+            sopa.setTematica(cursor.getString(1));
+            sopa.setStringSopa(cursor.getString(2));
+            sopa.setStringArrayPalabras(cursor.getString(3));
             cursor.close();
         } else {
-            usuario = null;
+            sopa = null;
         }
         sQLiteDatabase.close();
-        return usuario;
+        return sopa;
     }
+    //------------------------------ selectPalabrasByIdSopa ------------------------------//
 
-    //------------------------------ SelectUsuario by Nombre y Password ------------------------------//
-
-    public Usuario selectUsuarioByNombreAndPassword (String nombre, String pass) {
-        String query = "Select * FROM " + TABLE_NAME_USUARIO + " WHERE " + NOMBRE +
-                " like " + "'" + nombre + "'" + " and " + PASSWORD + " like " + "'" + pass + "'";
+    public ArrayList<Palabra> selectPalabrasByIdSopa (int idSopa) {
+        ArrayList<Palabra> ret = new ArrayList<>();
+        String query = "Select * FROM " + TABLE_NAME_PALABRAS_SOPA + " WHERE " + ID_SOPA_FK +
+                "=" + "'" + idSopa + "'";
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
+        Palabra palabra;
+        while (cursor.moveToNext()) {
+            palabra = new Palabra();
+            palabra.setIdPalabra(cursor.getInt(0));
+            palabra.setIdSopaFk(cursor.getInt(1));
+            palabra.setStringPalabra(cursor.getString(2));
 
-        Usuario usuario;
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            usuario = new Usuario();
-            usuario.setId(cursor.getInt(0));
-            usuario.setNombreUsuario(cursor.getString(1));
-            usuario.setPassword(cursor.getString(2));
-            cursor.close();
-        } else {
-            usuario = null;
+            ret.add(palabra);
         }
+        cursor.close();
         sQLiteDatabase.close();
-        return usuario;
+        return ret;
     }
 
-    //------------------------------ SelectTarea by Id & IdUsuario------------------------------//
+    //------------------------------ selectAllScores ------------------------------//
 
-    public Tarea selectTareaByIdAndIdUsuario (int id, int idUsuario) {
-        String query = "Select * FROM " + TABLE_NAME_TAREA + " WHERE " + ID_TAREA +
-                " = " + "'" + id + "'" + " and " + ID_USUARIO_FK + " = " + "'" +
-                idUsuario + "'";
+    public ArrayList<Score> selectAllScores() {
+        ArrayList<Score> ret = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME_SCORES;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery(query, null);
-
-        Tarea tarea;
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            tarea = new Tarea();
-            tarea.setId(cursor.getInt(0));
-            tarea.setIdUsuarioFk(cursor.getInt(1));
-            tarea.setNombreTarea(cursor.getString(2));
-            tarea.setDescripcion(cursor.getString(3));
-            tarea.setFecha(cursor.getString(4));
-            tarea.setCoste(Integer.parseInt(cursor.getString(5)));
-            tarea.setPrioridad(cursor.getString(6));
-            tarea.setRealizado(Integer.parseInt(cursor.getString(7)));
-            cursor.close();
-        } else {
-            tarea = null;
+        Score score;
+        while (cursor.moveToNext()) {
+            score = new Score();
+            score.setIdScore(cursor.getInt(0));
+            score.setPlayer(cursor.getString(1));
+            score.setScore(cursor.getString(2));
+            ret.add(score);
         }
+        cursor.close();
         sQLiteDatabase.close();
-        return tarea;
+        return ret;
     }
 
-    //------------------------------ InsertUsuario ------------------------------//
+    //------------------------------ selectBestScores ------------------------------//
 
-    public void insertUsuario (Usuario usuario) {
+    public ArrayList<Score> selectBestScoresByIdJuego(int idJuego) {
+        ArrayList<Score> ret = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME_SCORES + " WHERE " + ID_JUEGO_FK +
+                "=" + "'" + idJuego + "'"+ " ORDER BY " + SCORE + " DESC ";
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery(query, null);
+        Score score;
+        while (cursor.moveToNext()) {
+            score = new Score();
+            score.setIdScore(cursor.getInt(0));
+            score.setPlayer(cursor.getString(1));
+            score.setScore(cursor.getString(2));
+            ret.add(score);
+        }
+        cursor.close();
+        sQLiteDatabase.close();
+        return ret;
+    }
+
+    //------------------------------ InsertPregunta ------------------------------//
+
+    public void insertPregunta(Pregunta pregunta) {
         ContentValues values = new ContentValues();
-        values.put(NOMBRE, usuario.getNombreUsuario());
-        values.put(PASSWORD, usuario.getPassword());
+        values.put(TEXTO, pregunta.getTexto());
+        values.put(OPCION1, pregunta.getOpcion1());
+        values.put(OPCION2, pregunta.getOpcion2());
+        values.put(OPCION3, pregunta.getOpcion3());
+        values.put(OPCION4, pregunta.getOpcion4());
+        values.put(RESPUESTA, pregunta.getRespuesta());
 
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        sQLiteDatabase.insert(TABLE_NAME_USUARIO, null, values);
+        sQLiteDatabase.insert(TABLE_NAME_PREGUNTAS_TRIVIA, null, values);
         sQLiteDatabase.close();
     }
 
-    //------------------------------ InsertTarea ------------------------------//
+    //------------------------------ InsertPalabra ------------------------------//
 
-    public void insertTarea (Tarea tarea) {
+    public void insertPalabra(Palabra palabra) {
         ContentValues values = new ContentValues();
-        values.put(ID_USUARIO_FK, tarea.getIdUsuarioFk());
-        values.put(NOMBRE_TAREA, tarea.getNombreTarea());
-        values.put(DESCRIPCION, tarea.getDescripcion());
-        values.put(FECHA, tarea.getFecha());
-        values.put(COSTE, tarea.getCoste());
-        values.put(PRIORIDAD, tarea.getPrioridad());
-        values.put(REALIZADO, tarea.getRealizado());
+        values.put(ID_SOPA_FK, palabra.getIdSopaFk());
+        values.put(STRING_PALABRA, palabra.getStringPalabra());
 
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        sQLiteDatabase.insert(TABLE_NAME_TAREA, null, values);
+        sQLiteDatabase.insert(TABLE_NAME_PALABRAS_SOPA, null, values);
         sQLiteDatabase.close();
     }
 
-    //------------------------------ UpdateUsuario ------------------------------//
+    //------------------------------ InsertScore ------------------------------//
 
-    public boolean updateUsuario (Usuario usuario) {
+    public void insertScore(Score score) {
+        ContentValues values = new ContentValues();
+        values.put(ID_JUEGO_FK, score.getIdJuegoFk());
+        values.put(PLAYER, score.getPlayer());
+        values.put(SCORE, score.getScore());
+
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        sQLiteDatabase.insert(TABLE_NAME_SCORES, null, values);
+        sQLiteDatabase.close();
+    }
+
+    //------------------------------ InsertSopa ------------------------------//
+
+    public void insertSopa(Sopa sopa) {
+        ContentValues values = new ContentValues();
+        values.put(TEMATICA, sopa.getTematica());
+        values.put(ARRAY_SOPA, sopa.getStringSopa());
+        values.put(ARRAY_PALABRAS, sopa.getStringArrayPalabras());
+
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        sQLiteDatabase.insert(TABLE_NAME_SOPAS, null, values);
+        sQLiteDatabase.close();
+    }
+
+    //------------------------------ InsertJuego ------------------------------//
+
+    public void insertJuego(Juego juego) {
+        ContentValues values = new ContentValues();
+        values.put(NOMBRE_JUEGO, juego.getNombre());
+
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        sQLiteDatabase.insert(TABLE_NAME_JUEGOS, null, values);
+        sQLiteDatabase.close();
+    }
+
+    //------------------------------ UpdatePregunta ------------------------------//
+
+    public boolean updatePregunta(Pregunta pregunta) {
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         ContentValues args = new ContentValues();
-        args.put(NOMBRE, usuario.getNombreUsuario());
-        args.put(PASSWORD, usuario.getPassword());
-        String whereClause = ID_USUARIO + "=" + usuario.getId();
+        args.put(TEXTO, pregunta.getTexto());
+        args.put(OPCION1, pregunta.getOpcion1());
+        args.put(OPCION2, pregunta.getOpcion2());
+        args.put(OPCION3, pregunta.getOpcion3());
+        args.put(OPCION4, pregunta.getOpcion4());
+        args.put(RESPUESTA, pregunta.getRespuesta());
+        String whereClause = ID_PREGUNTA + "=" + pregunta.getIdPregunta();
 
-        return sQLiteDatabase.update(TABLE_NAME_USUARIO, args, whereClause, null) > 0;
+        return sQLiteDatabase.update(TABLE_NAME_PREGUNTAS_TRIVIA, args, whereClause, null) > 0;
     }
 
-    //------------------------------ UpdateTarea ------------------------------//
-    public boolean updateTarea (Tarea tarea) {
+    //------------------------------ UpdatePalabra ------------------------------//
+
+    public boolean updatePalabra(Palabra palabra) {
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
         ContentValues args = new ContentValues();
-        args.put(NOMBRE_TAREA, tarea.getNombreTarea());
-        args.put(DESCRIPCION, tarea.getDescripcion());
-        args.put(FECHA, tarea.getFecha());
-        args.put(COSTE, tarea.getCoste());
-        args.put(PRIORIDAD, tarea.getPrioridad());
-        args.put(REALIZADO, tarea.getRealizado());
-        String whereClause = ID_TAREA + "="  + tarea.getId() + " AND " + ID_USUARIO_FK + "=" +  tarea.getIdUsuarioFk() ;
+        args.put(STRING_PALABRA, palabra.getStringPalabra());
 
-        return sQLiteDatabase.update(TABLE_NAME_TAREA, args, whereClause, null) > 0;
+        String whereClause = ID_PALABRA + "=" + palabra.getIdPalabra();
+
+        return sQLiteDatabase.update(TABLE_NAME_PALABRAS_SOPA, args, whereClause, null) > 0;
     }
 
-    public void updateTareaSQL (Tarea tarea) {
+    //------------------------------ UpdateScore ------------------------------//
+
+    public boolean updateScore(Score score) {
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        String sql="UPDATE "+ TABLE_NAME_TAREA
-                + " SET " + NOMBRE_TAREA + "='" + tarea.getNombreTarea() + "',"
-                + DESCRIPCION + "='" + tarea.getDescripcion() + "',"
-                + FECHA + "='" + tarea.getFecha() + "',"
-                + COSTE + "='" + tarea.getCoste() + "',"
-                + PRIORIDAD + "='" + tarea.getPrioridad() + "',"
-                + REALIZADO + "=" + tarea.getRealizado()
-                + " WHERE "+ ID_TAREA + "="  + tarea.getId() + " AND " + ID_USUARIO_FK + "=" +  tarea.getIdUsuarioFk();
+        ContentValues args = new ContentValues();
+        args.put(PLAYER, score.getPlayer());
+        args.put(SCORE, score.getScore());
 
-        sQLiteDatabase.execSQL(sql);
+
+        String whereClause = ID_SCORE + "=" + score.getIdScore();
+
+        return sQLiteDatabase.update(TABLE_NAME_SCORES, args, whereClause, null) > 0;
     }
 
-    //------------------------------ DeleteUsuario ------------------------------//
+    //------------------------------ UpdateSopa ------------------------------//
 
-    public int deleteUsuarioById (int id) {
+    public boolean updateSopa(Sopa sopa) {
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(TEMATICA, sopa.getTematica());
+        args.put(ARRAY_SOPA, sopa.getStringSopa());
+        args.put(ARRAY_PALABRAS, sopa.getStringArrayPalabras());
+
+
+
+        String whereClause = ID_SCORE + "=" + sopa.getIdSopa();
+
+        return sQLiteDatabase.update(TABLE_NAME_SOPAS, args, whereClause, null) > 0;
+    }
+
+    //------------------------------ DeletePreguntabyId ------------------------------//
+
+    public int deletePreguntaById(int id) {
         int ret;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        Usuario usuario = new Usuario ();
-        usuario.setId(id);
-        ret = sQLiteDatabase.delete(TABLE_NAME_USUARIO, ID_USUARIO + "=?",
-                new String[] {
-                        String.valueOf(usuario.getId())
+        Pregunta pregunta = new Pregunta();
+        pregunta.setIdPregunta(id);
+        ret = sQLiteDatabase.delete(TABLE_NAME_PREGUNTAS_TRIVIA, ID_PREGUNTA + "=?",
+                new String[]{
+                        String.valueOf(pregunta.getIdPregunta())
                 });
         sQLiteDatabase.close();
         return ret;
     }
 
-    //------------------------------ DeleteTarea ------------------------------//
+    //------------------------------ DeletePalabrabyID ------------------------------//
 
-    public int deleteTareaById (int id) {
+    public int deletePalabraById(int id) {
         int ret;
         SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
-        Tarea tarea = new Tarea();
-        tarea.setId(id);
-        ret = sQLiteDatabase.delete(TABLE_NAME_TAREA, ID_TAREA + "=?",
-                new String[] {
-                        String.valueOf(tarea.getId())
+        Palabra palabra = new Palabra();
+        palabra.setIdPalabra(id);
+        ret = sQLiteDatabase.delete(TABLE_NAME_PALABRAS_SOPA, ID_PALABRA + "=?",
+                new String[]{
+                        String.valueOf(palabra.getIdPalabra())
+                });
+        sQLiteDatabase.close();
+        return ret;
+    }
+
+    //------------------------------ DeleteScorebyID ------------------------------//
+
+    public int deleteScoreById(int id) {
+        int ret;
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Score score = new Score();
+        score.setIdScore(id);
+        ret = sQLiteDatabase.delete(TABLE_NAME_SCORES, ID_SCORE + "=?",
+                new String[]{
+                        String.valueOf(score.getIdScore())
+                });
+        sQLiteDatabase.close();
+        return ret;
+    }
+
+    //------------------------------ DeleteSopabyId ------------------------------//
+
+    public int deleteSopaById(int id) {
+        int ret;
+        SQLiteDatabase sQLiteDatabase = this.getWritableDatabase();
+        Sopa sopa = new Sopa();
+        sopa.setIdSopa(id);
+        ret = sQLiteDatabase.delete(TABLE_NAME_SOPAS, ID_SOPA + "=?",
+                new String[]{
+                        String.valueOf(sopa.getIdSopa())
                 });
         sQLiteDatabase.close();
         return ret;
@@ -392,8 +458,8 @@ import modelo.Usuario;
         try {
             SQLiteDatabase sQLiteDatabase = this.getReadableDatabase();
             String query = "select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
-                    TABLE_NAME_USUARIO + "'";
-            cursor = sQLiteDatabase.rawQuery( query, null );
+                    TABLE_NAME_PREGUNTAS_TRIVIA + "'";
+            cursor = sQLiteDatabase.rawQuery(query, null);
             if (cursor != null) {
                 if (cursor.getCount() > 0) {
                     ret = true;
@@ -401,8 +467,8 @@ import modelo.Usuario;
             }
         } catch (Exception e) {
             // Nothing to do here...
-        } finally{
-            try{
+        } finally {
+            try {
                 assert cursor != null;
                 cursor.close();
             } catch (NullPointerException e) {
@@ -412,24 +478,22 @@ import modelo.Usuario;
         return ret;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         boolean ret = true;
         Cursor cursor = null;
         try {
             SQLiteDatabase sQLiteDatabase = this.getReadableDatabase();
-            cursor = sQLiteDatabase.rawQuery( "SELECT count(*) FROM (select 0 from " +
-                    TABLE_NAME_USUARIO + " limit 1)", null );
+            cursor = sQLiteDatabase.rawQuery("SELECT count(*) FROM (select 0 from " +
+                    TABLE_NAME_PREGUNTAS_TRIVIA + " limit 1)", null);
             cursor.moveToFirst();
-            int count = cursor.getInt( 0 );
+            int count = cursor.getInt(0);
             if (count > 0) {
                 ret = false;
             }
         } catch (Exception e) {
             // Nothing to do here...
-        }
-        finally {
+        } finally {
             try {
-                assert cursor != null;
                 cursor.close();
             } catch (Exception e) {
                 // Nothing to do here...
@@ -437,7 +501,7 @@ import modelo.Usuario;
         }
         return ret;
     }
-
+}
 
     /*String query = "Select * FROM " + TABLE_NAME_USUARIO + " WHERE " + NOMBRE +
             " like " + "'" + nombre + "'" + " and " + PASSWORD + " like " + "'" +

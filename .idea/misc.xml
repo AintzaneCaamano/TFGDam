@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.2625" />
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/activity_black.xml" value="0.12183383991894631" />
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/activity_hanoy.xml" value="0.12183383991894631" />
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/activity_info.xml" value="0.12183383991894631" />
@@ -16,15 +17,11 @@
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/activity_trivia.xml" value="0.12183383991894631" />
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/activity_your_score.xml" value="0.264" />
         <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam/tfgDam/app/src/main/res/layout/adapters/activity_layout_score_list.xml" value="0.12284701114488349" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/act_list_adapter.xml" value="0.6" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/activity_hanoy.xml" value="0.1875" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/activity_layout_score_list.xml" value="0.13858695652173914" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/activity_menu.xml" value="0.17844202898550723" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/activity_ranking.xml" value="0.19202898550724637" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/activity_simon.xml" value="0.176" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/activity_tresraya.xml" value="0.2" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/activity_trivia.xml" value="0.14719202898550723" />
-        <entry key="..\:/Imagenes/Videos/AINTZANE/tfgDam2/tfgDam/app/src/main/res/layout/activity_your_score.xml" value="0.14719202898550723" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sopa.xml" value="0.25248870849609373" />
+        <entry key="app/src/main/res/layout/activity_trivia.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/grid_item_sopa.xml" value="0.11125126135216952" />
       </map>
     </option>
   </component>
